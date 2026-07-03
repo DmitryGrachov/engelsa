@@ -1,0 +1,51 @@
+/* Comparisons apartments modal — сравнение квартир (mobile) */
+
+.comparisonsApartmentsModalRoot {
+    z-index: 119;
+}
+
+.comparisonsApartmentsModalRoot.comparisons-apartments-modal--open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+#comparisonsApartmentsModal.favoritesApartmentsModalRoot--mobile {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+    max-height: 100vh;
+    max-height: 100dvh;
+    padding: 0;
+    background: #f3f3f3;
+    color: #2a2a2a;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+#comparisonsApartmentsModal.favoritesApartmentsModalRoot--mobile comparisons-apartments-mob-view {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-right: max(15px, env(safe-area-inset-right));
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-bottom: 80px;
+}
+
+#comparisonsApartmentsModal.favoritesApartmentsModalRoot--mobile *,
+#comparisonsApartmentsModal.favoritesApartmentsModalRoot--mobile *::before,
+#comparisonsApartmentsModal.favoritesApartmentsModalRoot--mobile *::after {
+    touch-action: manipulation;
+}
+
+/* Без кнопки сравнения в шапке — одна колонка действий */
+#comparisonsApartmentsModal .favoritesApartmentsMobHeaderActions {
+    justify-content: flex-start;
+}

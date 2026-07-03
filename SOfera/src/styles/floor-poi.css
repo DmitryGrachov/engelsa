@@ -1,0 +1,167 @@
+/* Поэтажный POI — <floor-poi-card> (71×73) */
+
+floor-poi-card {
+  position: absolute;
+  z-index: 4;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: Onest, system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+floor-poi-card.hidden {
+  display: none;
+}
+
+.floorPoiCard {
+  box-sizing: border-box;
+  width: 71px;
+  height: 73px;
+  padding: 3px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+}
+
+.floorPoiCard--status-active.floorPoiCard--selected {
+  border-color: #54d6bc;
+  box-shadow: 0 0 0 2px #54d6bc, 0 2px 8px rgba(30, 45, 60, 0.1);
+}
+
+.floorPoiCard--status-reserved.floorPoiCard--selected {
+  border-color: #fbc24f;
+  box-shadow: 0 0 0 2px #fbc24f, 0 2px 8px rgba(30, 45, 60, 0.1);
+}
+
+.floorPoiCard--status-sold.floorPoiCard--selected {
+  border-color: #b7b7b7;
+  box-shadow: 0 0 0 2px #b7b7b7, 0 2px 8px rgba(30, 45, 60, 0.1);
+}
+
+.floorPoiCardPill {
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 23px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.floorPoiCard--status-active .floorPoiCardPill {
+  background: #26bda9;
+}
+
+.floorPoiCard--status-reserved .floorPoiCardPill {
+  background: #fbc24f;
+}
+
+.floorPoiCard--status-sold .floorPoiCardPill {
+  background: #b7b7b7;
+}
+
+.floorPoiCardPillLock {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  background: #ffffff;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  pointer-events: none;
+}
+
+.floorPoiCardArea {
+  margin: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-height: 0;
+  color: #333333;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.floorPoiCardAreaValue {
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.floorPoiCardAreaUnit {
+  font-size: 11px;
+  font-weight: 400;
+  transform: translateY(1px);
+}
+
+/* Мобила (≤818px): пропорционально компактнее десктопного 71×73 */
+@media screen and (max-width: 818px) {
+  floor-poi-card {
+    --floor-poi-mobile-scale: 0.75;
+  }
+
+  .floorPoiCard {
+    width: calc(71px * var(--floor-poi-mobile-scale));
+    height: calc(73px * var(--floor-poi-mobile-scale));
+    padding: calc(3px * var(--floor-poi-mobile-scale)) calc(4px * var(--floor-poi-mobile-scale));
+    gap: calc(4px * var(--floor-poi-mobile-scale));
+    border-radius: calc(23px * var(--floor-poi-mobile-scale));
+  }
+
+  .floorPoiCard--status-active.floorPoiCard--selected {
+    box-shadow:
+      0 0 0 calc(2px * var(--floor-poi-mobile-scale)) #54d6bc,
+      0 calc(2px * var(--floor-poi-mobile-scale)) calc(8px * var(--floor-poi-mobile-scale))
+        rgba(30, 45, 60, 0.1);
+  }
+
+  .floorPoiCard--status-reserved.floorPoiCard--selected {
+    box-shadow:
+      0 0 0 calc(2px * var(--floor-poi-mobile-scale)) #fbc24f,
+      0 calc(2px * var(--floor-poi-mobile-scale)) calc(8px * var(--floor-poi-mobile-scale))
+        rgba(30, 45, 60, 0.1);
+  }
+
+  .floorPoiCard--status-sold.floorPoiCard--selected {
+    box-shadow:
+      0 0 0 calc(2px * var(--floor-poi-mobile-scale)) #b7b7b7,
+      0 calc(2px * var(--floor-poi-mobile-scale)) calc(8px * var(--floor-poi-mobile-scale))
+        rgba(30, 45, 60, 0.1);
+  }
+
+  .floorPoiCardPill {
+    flex: 0 0 calc(40px * var(--floor-poi-mobile-scale));
+    border-radius: calc(23px * var(--floor-poi-mobile-scale));
+    font-size: calc(15px * var(--floor-poi-mobile-scale));
+  }
+
+  .floorPoiCardPillLock {
+    width: calc(22px * var(--floor-poi-mobile-scale));
+    height: calc(22px * var(--floor-poi-mobile-scale));
+  }
+
+  .floorPoiCardAreaValue {
+    font-size: calc(15px * var(--floor-poi-mobile-scale));
+  }
+
+  .floorPoiCardAreaUnit {
+    font-size: calc(11px * var(--floor-poi-mobile-scale));
+    transform: translateY(calc(1px * var(--floor-poi-mobile-scale)));
+  }
+}

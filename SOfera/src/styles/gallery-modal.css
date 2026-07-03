@@ -1,0 +1,214 @@
+/* Gallery modal — <gallery-view>, <gallery-carousel> */
+
+.galleryModalRoot {
+    position: fixed;
+    inset: 0;
+    z-index: 121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding:
+        max(16px, env(safe-area-inset-top))
+        max(16px, env(safe-area-inset-right))
+        max(16px, env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 0.24s;
+}
+
+.galleryModalRoot.gallery-modal--open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+.galleryModalBackdrop {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: rgba(243, 243, 243, 0.92);
+    cursor: pointer;
+}
+
+.galleryModalPanel {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    width: min(100%, 354px);
+    max-height: calc(100dvh - 32px);
+    height: 629px;
+    overflow: auto;
+    padding: 27px 25px;
+    border-radius: 40px;
+    background: #ffffff;
+    pointer-events: auto;
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+}
+
+.galleryModalRoot--desktop .galleryModalPanel {
+    width: min(100%, 560px);
+    padding: 36px 40px;
+    border-radius: 36px;
+}
+
+.galleryModalRoot *,
+.galleryModalRoot *::before,
+.galleryModalRoot *::after {
+    touch-action: manipulation;
+}
+
+gallery-view {
+    display: block;
+}
+
+.galleryViewSectionLabel {
+    margin: 0 0 8px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.galleryViewTitle {
+    margin: 0 0 18px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.galleryModalRoot--desktop .galleryViewSectionLabel {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.galleryModalRoot--desktop .galleryViewTitle {
+    margin-bottom: 24px;
+    font-size: 24px;
+}
+
+gallery-carousel {
+    display: block;
+}
+
+.galleryCarousel {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.galleryCarouselFrame {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 393px;
+    border-radius: 20px;
+    background: #1a1a1a;
+    touch-action: pan-y;
+}
+
+.galleryModalRoot--desktop .galleryCarouselFrame {
+    height: 340px;
+    border-radius: 24px;
+}
+
+.galleryCarouselFrame--swipeable {
+    touch-action: pan-y;
+}
+
+.galleryCarouselImg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    -webkit-user-drag: none;
+    cursor: pointer;
+}
+
+.galleryCarouselOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.galleryCarouselSwipeHint {
+    display: block;
+    width: 113px;
+    height: 108px;
+    object-fit: contain;
+    opacity: 1;
+}
+
+.galleryCarouselTourBtn {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 31px;
+    margin: 0;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 30px;
+    font-family: Onest, system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1;
+    color: #ffffff;
+    background: #26BDA9;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.galleryCarouselTourBtnIcon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.galleryCarouselCounter {
+    align-self: flex-end;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #6F6F6F;
+}
+
+.galleryViewProjectTitle {
+    margin: 0px 0 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.galleryModalRoot--desktop .galleryViewProjectTitle {
+    font-size: 22px;
+}
+
+.galleryViewDescription {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 400;
+    color: #A5A5A5;
+}
+
+.galleryModalRoot--desktop .galleryViewDescription {
+    font-size: 14px;
+    line-height: 1.5;
+}

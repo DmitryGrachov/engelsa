@@ -1,0 +1,512 @@
+/* Account modal — <account-mob-view>, <account-desk-view> */
+
+.accountModalRoot {
+    position: fixed;
+    inset: 0;
+    z-index: 117;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 0.38s;
+}
+
+.accountModalRoot.account-modal--open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+/* ——— Mobile ——— */
+
+#accountModal.accountModalRoot--mobile {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding-top: max(22px, env(safe-area-inset-top));
+    padding-right: max(30px, env(safe-area-inset-right));
+    padding-bottom: 90px;
+    padding-left: max(30px, env(safe-area-inset-left));
+    background: #f3f3f3;
+    color: #2a2a2a;
+    overflow: hidden;
+    overscroll-behavior: contain;
+    touch-action: manipulation;
+}
+
+#accountModal.accountModalRoot--mobile account-mob-header {
+    display: block;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+#accountModal.accountModalRoot--mobile account-mob-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+}
+
+#accountModal.accountModalRoot--mobile > account-mob-share-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    pointer-events: none;
+}
+
+.accountMobModalHeader {
+    flex-shrink: 0;
+    margin-bottom: 46px;
+}
+
+.accountMobModalTopNav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+}
+
+.accountMobModalLogo {
+    display: block;
+    height: 8px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.accountMobModalPraim {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    display: block;
+    height: 29px;
+    width: auto;
+    max-width: calc(100% - 120px);
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.accountMobModalMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #333333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accountMobModalMenuIcon {
+    display: block;
+}
+
+#accountModal.accountModalRoot--mobile *,
+#accountModal.accountModalRoot--mobile *::before,
+#accountModal.accountModalRoot--mobile *::after {
+    touch-action: manipulation;
+}
+
+.accountMobView {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+}
+
+.accountMobScroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+}
+
+.accountMobShareBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+    padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    background: rgba(243, 243, 243, 0.28);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    pointer-events: none;
+}
+
+.accountMobHeader {
+    position: relative;
+    flex-shrink: 0;
+    padding-bottom: 38px;
+}
+
+.accountMobHeaderInner {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+}
+
+.accountMobUser {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.accountMobAvatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+}
+
+.accountMobAvatarSvg {
+    display: block;
+    height: 100%;
+}
+
+.accountMobUserText {
+    min-width: 0;
+}
+
+.accountMobGreeting {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.accountMobUserId {
+    margin: 7px 0 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: #8D8D8D;
+}
+
+.accountMobLead {
+    margin: 0 0 28px;
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: #8D8D8D;
+}
+
+.accountMobSectionHead {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-bottom: 27px;
+}
+
+.accountMobSectionTitle {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.accountMobSectionIcon {
+    width: 40px;
+    height: 40px;
+}
+
+.like-icon {
+    width: 20px !important; 
+    height: 20px !important;
+}
+
+.accountMobCards {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex-shrink: 0;
+}
+
+.accountMobRecommendations {
+    margin-top: 28px;
+    flex-shrink: 0;
+}
+
+.accountMobRecommendationsHead {
+    margin-bottom: 20px;
+}
+
+.accountMobRecommendationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.accountMobRecommendationsList > account-mob-recommendation-card {
+    display: block;
+    flex-shrink: 0;
+}
+
+#accountModal.accountModalRoot--mobile .accountMobScroll {
+    touch-action: pan-y;
+}
+
+#accountModal.accountModalRoot--mobile .accountMobScroll * {
+    touch-action: pan-y;
+}
+
+#accountModal.accountModalRoot--mobile .filterMobCardPlanWrap--swipeable {
+    touch-action: pan-y;
+}
+
+.accountMobCard {
+    flex-shrink: 0;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.accountMobCardBody {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: stretch;
+    min-height: 92px;
+}
+
+.accountMobCardText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 30px;
+    min-width: 0;
+}
+
+.accountMobCardTitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.accountMobCardCount {
+    margin: 4px 0 0;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+button.accountMobCard {
+    width: 100%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+button.accountMobCard:disabled {
+    cursor: not-allowed;
+}
+
+.accountMobCard--apartments {
+    background: #1A1A1A;
+    color: #ffffff;
+}
+
+.accountMobCard--parking {
+    background: #1a1a1a;
+    color: #8f8f8f;
+}
+
+.accountMobCard--locked {
+    position: relative;
+}
+
+.accountMobCard--all {
+    background: #ffffff;
+    color: #1D1D1D;
+    display: none;
+}
+
+.accountMobCard--all .accountMobCardCount {
+    opacity: 1;
+    color: #1D1D1D;
+}
+ 
+.accountMobCardMedia {
+    position: relative;
+    min-height: 108px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.accountMobCard--apartments .accountMobCardMediaImg {
+    display: block;
+    width: 100%;
+    height: 73px;
+    min-height: 78px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    opacity: 50%;
+}
+
+.accountMobCard--apartments-has-saved .accountMobCardMediaImg {
+    opacity: 1;
+}
+
+.accountMobCardMediaImg {
+    display: block;
+    width: 100%;
+    height: 73px;
+    min-height: 78px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+}
+
+.accountMobCardAction {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 30px;
+    padding: 8px 26px;
+    background: #151515;
+    color: #FFFFFF;
+    font-size: 8px;
+    font-weight: 400;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.accountMobCardSoon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 400;
+    background: rgba(16, 16, 16, 0.7);
+    pointer-events: none;
+}
+
+.accountMobCardSoonIcon {
+    display: block;
+}
+
+.accountMobCardThumbs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 12px 12px 12px 0;
+    align-self: center;
+}
+
+.accountMobCardThumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-top-left-radius: 19px;
+    border-bottom-left-radius: 19px;
+    object-fit: cover;
+    object-position: left;
+}
+
+.accountMobCardThumb--parking {
+    object-position: center;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 19px;
+    border-bottom-right-radius: 19px;
+}
+
+.accountMobShareBtn {
+    pointer-events: auto;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 40px;
+    padding: 12px 30px;
+    border: 1px solid #d8d8d8;
+    border-radius: 53px;
+    background: #ffffff;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.accountMobShareBtnText {
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.accountMobShareBtnIcon {
+    width: 15px;
+    height: 15px;
+    display: block;
+    object-fit: contain;
+}
+
+/* ——— Desktop ——— */
+
+#accountModalDesk.accountModalRoot--desktop {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: #f3f3f3;
+    color: #2a2a2a;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+#accountModalDesk.accountModalRoot--desktop *,
+#accountModalDesk.accountModalRoot--desktop *::before,
+#accountModalDesk.accountModalRoot--desktop *::after {
+    touch-action: manipulation;
+}
+
+.accountDeskPanel {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background: transparent;
+    transform: none;
+    transition: none;
+    box-shadow: none;
+}
+
+#accountModalDesk.accountModalRoot--desktop.account-modal--open .accountDeskPanel {
+    transform: none;
+}

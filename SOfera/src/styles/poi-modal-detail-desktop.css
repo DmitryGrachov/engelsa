@@ -1,0 +1,170 @@
+/* POI detail — десктопная панель (≥819px), variant="desk-panel" */
+
+@media screen and (min-width: 819px) {
+  .poiModalDetail--desk-panel .poiModalDetailScroll {
+    padding:
+      calc(27px + env(safe-area-inset-top, 0px))
+      28px
+      calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTitle {
+    font-size: 17px;
+    font-weight: 500;
+    color: #333333;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailNumber {
+    padding: 5px 12px;
+    font-size: 13px;
+    background: #505050;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailArea {
+    font-size: 17px;
+    font-weight: 500;
+    color: #333333;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailBadge {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    margin-top: 6px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailBadge--reserved {
+    background: #F8CC53;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailBadge--sold {
+    background: #F27D59;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailPlanSection {
+    margin-top: 0;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailPlanWrap {
+    margin-top: 3px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailViewTabs {
+    gap: 4px;
+    margin-top: 10px;
+    padding: 4px 6px;
+    border-radius: 22px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailViewTab {
+    padding: 4px 10px;
+    font-size: 8px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTags {
+    margin-top: 14px;
+    gap: 15px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTagsList {
+    gap: 5px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTag {
+    padding: 5px 13px;
+    font-size: 9px;
+    border-color: #D9D9D9;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTagMore {
+    padding: 5px 13px;
+    font-size: 9px;
+    font-weight: 400;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTagChevron {
+    width: 10px;
+    height: 6px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailStats {
+    margin-top: 15px;
+    padding: 10px 8px 10px 0;
+    border-radius: 28px;
+    background: #F7F7F7;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailStat {
+    padding: 10px 8px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailStat + .poiModalDetailStat::before {
+    height: 28px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailStatValue {
+    font-size: 15px;
+    font-weight: 500;
+    color: #363636;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailStatLabel {
+    margin-top: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #363636;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailFavorite {
+    width: 40px;
+    height: 40px;
+    background: #EFEFEF;
+    color: #828282;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailFavorite--active {
+    color: #26BDA9;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailPrice {
+    margin-top: 20px;
+    font-size: 27px;
+    font-weight: 600;
+    color: #3B3B3B;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailPrice--sold {
+    color: rgba(59, 59, 59, 0.1);
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTourBtn {
+    height: 49px;
+    margin-top: 23px;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 400;
+    background: #F2F2F2;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTourBtnIcon {
+    width: 15px;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailDetailsBtn {
+    height: 48px;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailCalculator {
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #656565;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailCalculatorIcon {
+    width: 18px;
+  }
+}

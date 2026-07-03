@@ -1,0 +1,312 @@
+/* Floor plan slice modal — mobile <poi-modal-sheet> + <poi-modal-sheet-detail> */
+#floorPlanSliceModal {
+  position: fixed;
+  inset: 0;
+  z-index: 170;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 0.38s;
+}
+
+#floorPlanSliceModal.floor-plan-slice-modal--open {
+  visibility: visible;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+#floorPlanSliceModal #floorPlanSliceModalBackdrop {
+  pointer-events: none;
+}
+
+#floorPlanSliceModal #floorPlanSliceModalSheet {
+  pointer-events: auto;
+}
+
+#floorPlanSliceModalSheet #floorPlanSliceModalTopClose {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #868686;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+#floorPlanSliceModalSheet #floorPlanSliceModalTopClose:hover {
+  background: #e8e8e8;
+}
+
+#floorPlanSliceModalSheet #floorPlanSliceModalTopClose:active {
+  transform: translateX(-50%) scale(0.96);
+}
+
+#floorPlanSliceModalSheet #floorPlanSliceModalTopClose .floorPlanSliceModalTopCloseIcon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+  font-weight: 400;
+  display: block;
+  margin-top: -1px;
+}
+
+#floorPlanSliceModalSheet.floor-plan-slice-modal-sheet--detail #floorPlanSliceModalTopClose {
+  display: none;
+}
+
+#floorPlanSliceModalBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.25;
+  transition: opacity 0.32s ease;
+}
+
+#floorPlanSliceModal.floor-plan-slice-modal--open #floorPlanSliceModalBackdrop {
+  opacity: 1;
+}
+
+#floorPlanSliceModalSheet {
+  --floor-plan-slice-sheet-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --floor-plan-slice-sheet-expand: 0.48s;
+  --floor-plan-slice-sheet-radius-dur: 0.72s;
+  --floor-plan-slice-sheet-radius-ease: cubic-bezier(0.45, 0.02, 0.32, 1);
+
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 243.85px;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 32px 32px 0 0;
+  background-color: white;
+  transform: translateY(100%);
+  transition:
+    transform 0.38s var(--floor-plan-slice-sheet-ease),
+    height var(--floor-plan-slice-sheet-expand) var(--floor-plan-slice-sheet-ease),
+    border-radius var(--floor-plan-slice-sheet-radius-dur) var(--floor-plan-slice-sheet-radius-ease);
+}
+
+#floorPlanSliceModal.floor-plan-slice-modal--open #floorPlanSliceModalSheet {
+  transform: translateY(0);
+}
+
+#floorPlanSliceModalSheet.floor-plan-slice-modal-sheet--detail {
+  height: 100dvh;
+  border-radius: 0;
+  background-color: #ffffff;
+}
+
+#floorPlanSliceModalSheet poi-modal-sheet {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+#floorPlanSliceModalSheet.floor-plan-slice-modal-sheet--detail poi-modal-sheet {
+  display: none;
+}
+
+#floorPlanSliceModalSheet poi-modal-sheet-detail {
+  display: none;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+#floorPlanSliceModalSheet.floor-plan-slice-modal-sheet--detail poi-modal-sheet-detail {
+  display: flex;
+  height: 100%;
+}
+
+#floorPlanSliceModalDetailClose {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  color: #3a3a3a;
+  background: rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, background-color 0.2s ease;
+}
+
+#floorPlanSliceModalSheet.floor-plan-slice-modal-sheet--detail #floorPlanSliceModalDetailClose {
+  top: calc(27px + env(safe-area-inset-top, 0px));
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#floorPlanSliceModalDetailClose:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Floor plan slice modal — desktop <poi-modal-desk-panel> */
+.floorPlanSliceModalDeskRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 114;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 0.42s;
+}
+
+.floorPlanSliceModalDeskRoot.floor-plan-slice-modal-desk--open {
+  visibility: visible;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+#ui #floorPlanSliceModalDesk {
+  pointer-events: none !important;
+}
+
+#ui #floorPlanSliceModalDesk .floorPlanSliceModalDeskPanel {
+  pointer-events: auto !important;
+}
+
+.floorPlanSliceModalDeskPanel {
+  position: fixed;
+  top: 50%;
+  left: 58px;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: 745px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  border-radius: 45px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+  pointer-events: auto;
+  transform: translate(calc(-100% - 58px), -50%);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.floorPlanSliceModalDeskRoot.floor-plan-slice-modal-desk--open .floorPlanSliceModalDeskPanel {
+  transform: translate(0, -50%);
+}
+
+.floorPlanSliceModalDeskRoot.floor-plan-slice-modal-desk--fs-open .floorPlanSliceModalDeskPanel {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.floorPlanSliceModalDeskPanel poi-modal-desk-panel {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+.floorPlanSliceModalDeskFs {
+  position: fixed;
+  inset: 0;
+  z-index: 115;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #ffffff;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.floorPlanSliceModalDeskFs.floor-plan-slice-modal-desk-fs--open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+.floorPlanSliceModalDeskFs poi-modal-desk-detail {
+  display: none;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  pointer-events: auto;
+}
+
+.floorPlanSliceModalDeskFs.floor-plan-slice-modal-desk-fs--open poi-modal-desk-detail {
+  display: flex;
+}
+
+@media (min-width: 819px) {
+  #floorPlanSliceModal {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+@media (max-width: 818px) {
+  .floorPlanSliceModalDeskRoot,
+  .floorPlanSliceModalDeskFs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 819px) and (max-width: 899px) {
+  .floorPlanSliceModalDeskPanel {
+    transform: translate(calc(-100% - 58px), -50%) scale(0.88);
+    transform-origin: left center;
+  }
+
+  .floorPlanSliceModalDeskRoot.floor-plan-slice-modal-desk--open .floorPlanSliceModalDeskPanel {
+    transform: translate(0, -50%) scale(0.88);
+    transform-origin: left center;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 899px) {
+  .floorPlanSliceModalDeskPanel {
+    transform: translate(calc(-100% - 58px), -50%) scale(0.6666667);
+    transform-origin: left center;
+  }
+
+  .floorPlanSliceModalDeskRoot.floor-plan-slice-modal-desk--open .floorPlanSliceModalDeskPanel {
+    transform: translate(0, -50%) scale(0.6666667);
+    transform-origin: left center;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 819px) {
+  .floorPlanSliceModalDeskPanel {
+    width: 342px;
+    height: 671px;
+    border-radius: 44px;
+  }
+}

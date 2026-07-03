@@ -1,0 +1,291 @@
+/* «Инфраструктура» — панель слайдера в режиме «Карта» (#mapTopViewDock) */
+
+/* Верхний док («Вид сверху») */
+#mapInfraDock {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 113;
+    display: none;
+    top: 45px;
+    bottom: auto;
+    pointer-events: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#mapInfraDock.mapInfraDock--visible {
+    display: block;
+    pointer-events: auto;
+}
+
+/* Нижний док: панель «Инфраструктура» (над #panel) */
+#mapTopViewDock {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+}
+
+#mapTopViewDock.mapTopViewDock--visible {
+    display: flex;
+}
+
+#mapTopViewDock:not(.mapTopViewDock--infra-open) .mapInfraPanel {
+    display: none !important;
+}
+
+.mapInfraPanel {
+    position: relative;
+    box-sizing: border-box;
+    width: 146px;
+    height: 149px;
+    padding: 20px 20px 15px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+}
+
+.mapInfraPanel.mapInfraPanel--open {
+    display: flex;
+}
+
+.mapInfraPanelClose {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #3a3a3a;
+    background: rgba(0, 0, 0, 0.06);
+    -webkit-tap-highlight-color: transparent;
+    display: none;
+}
+
+.mapInfraPanelClose:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.mapInfraPanelCloseIcon {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1;
+    margin-top: -1px;
+}
+
+.mapInfraPanelTitle {
+    margin-bottom: 11px;
+    font-family: Onest, system-ui, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #333333;
+}
+
+.mapInfraPanelWalkLabel {
+    font-family: Onest, system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #333333;
+}
+
+.mapInfraPanelUnit {
+    margin: 0 0 10px;
+    font-family: Onest, system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #666666;
+}
+
+.mapInfraSlider {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.mapInfraSliderTrack {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    margin-top: -1px;
+    border-radius: 1px;
+    background: #d3d3d3;
+    pointer-events: none;
+}
+
+.mapInfraSliderThumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    width: 62px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    background: #26bda9;
+    color: #ffffff;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 2px 8px rgba(38, 189, 169, 0.45);
+}
+
+.mapInfraSliderThumb:active {
+    cursor: grabbing;
+}
+
+.mapInfraSliderThumbLabel {
+    font-family: Onest, system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (max-width: 819px) {
+    #mapInfraDock {
+        display: none;
+    }
+
+    #mapInfraDock.mapInfraDock--visible {
+        display: block;
+    }
+
+    #mapTopViewDock.mapTopViewDock--infra-open {
+        left: max(16px, env(safe-area-inset-left, 0px));
+        right: max(16px, env(safe-area-inset-right, 0px));
+        width: auto;
+        transform: none;
+    }
+}
+
+/* 819px: панель «Инфраструктура» — как на десктопе */
+@media (min-width: 819px) and (max-width: 819px) {
+    .mapInfraPanel,
+    #mapTopViewDock.mapTopViewDock--infra-open .mapInfraPanel {
+        width: 469px;
+        height: 149px;
+        padding: 30px 37px 23px;
+        border-radius: 29px;
+        box-sizing: border-box;
+    }
+
+    .mapInfraPanelClose {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        color: #606060;
+        background: #e9e9e9;
+    }
+
+    .mapInfraPanelTitle {
+        display: block;
+        margin-bottom: 11px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .mapInfraPanelWalkLabel {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .mapInfraPanelUnit {
+        font-size: 10px;
+        color: #868686;
+    }
+
+    .mapInfraSliderThumbLabel {
+        font-size: 12px;
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 818px) {
+    #mapTopViewDock.mapTopViewDock--infra-open .mapInfraPanel {
+        width: 328px;
+        box-sizing: border-box;
+    }
+
+    .mapInfraPanelTitle {
+        display: none;
+    }
+
+    .mapInfraPanel,
+    #mapTopViewDock.mapTopViewDock--infra-open .mapInfraPanel {
+        height: auto;
+        padding: 12px 20px 15px;
+    }
+}
+
+@media (min-width: 820px) {
+    .mapInfraPanel {
+        width: 469px;
+        height: 149px;
+        padding: 30px 37px 23px;
+        border-radius: 29px;
+    }
+
+    .mapInfraPanelClose {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        color: #606060;
+        background: #e9e9e9;
+    }
+
+    .mapInfraPanelTitle {
+        margin-bottom: 11px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .mapInfraPanelWalkLabel {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .mapInfraPanelUnit {
+        font-size: 10px;
+        color: #868686;
+    }
+
+    .mapInfraSliderThumbLabel {
+        font-size: 12px;
+        font-weight: 400;
+    }
+}

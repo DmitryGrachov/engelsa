@@ -1,0 +1,58 @@
+/* Comparisons modal — десктопная панель сравнения */
+
+.comparisonsModalRoot {
+    z-index: 119;
+}
+
+.comparisonsModalRoot.comparisons-modal--open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+#comparisonsModalDesk.accountModalRoot--desktop {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: #f3f3f3;
+    color: #2a2a2a;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+#comparisonsModalDesk.accountModalRoot--desktop *,
+#comparisonsModalDesk.accountModalRoot--desktop *::before,
+#comparisonsModalDesk.accountModalRoot--desktop *::after {
+    touch-action: manipulation;
+}
+
+#comparisonsModalDesk.accountModalRoot--desktop.comparisons-modal--open .accountDeskPanel {
+    transform: none;
+}
+
+#comparisonsModalDesk.accountModalRoot--desktop comparisons-desk-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#comparisonsModalDesk .accountDeskFavoritesCard--comparisons {
+    padding: 62px 32px 40px;
+}
+
+#comparisonsModalDesk.accountModalRoot--desktop .accountDeskFavoritesGrid::-webkit-scrollbar {
+    width: 6px;
+}
+
+#comparisonsModalDesk.accountModalRoot--desktop .accountDeskFavoritesGrid::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+#comparisonsModalDesk .accountDeskFavoritesCardPlan .filterMobCardPlanWrap--swipeable {
+    touch-action: pan-y;
+}

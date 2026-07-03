@@ -1,0 +1,440 @@
+/* POI mobile — нижняя шторка (#poiModal), превью <poi-modal-sheet>, деталка <poi-modal-sheet-detail> */
+
+#poiModal {
+  position: fixed;
+  inset: 0;
+  z-index: 170;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 0.38s;
+}
+
+#poiModal.poi-modal--open {
+  visibility: visible;
+  /* Сцена получает события; перехват только у шторки (сильнее правила #ui * { pointer-events: auto }). */
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+#poiModal #poiModalBackdrop {
+  pointer-events: none;
+}
+
+#poiModal #poiModalSheet {
+  pointer-events: auto;
+}
+
+/* Закрыть POI — внутри шторки, сверху по центру (не выходит за границы модалки) */
+#poiModalSheet #poiModalTopClose {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #868686;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+#poiModalSheet #poiModalTopClose:hover {
+  background: #e8e8e8;
+}
+
+#poiModalSheet #poiModalTopClose:active {
+  transform: translateX(-50%) scale(0.96);
+}
+
+#poiModalSheet #poiModalTopClose .poiModalTopCloseIcon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+  font-weight: 400;
+  display: block;
+  margin-top: -1px;
+}
+
+#poiModalSheet.poi-modal-sheet--detail #poiModalTopClose {
+  display: none;
+}
+
+#poiModalBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.0);
+  opacity: 0.25;
+  transition: opacity 0.32s ease;
+}
+
+#poiModal.poi-modal--open #poiModalBackdrop {
+  opacity: 1;
+}
+
+#poiModalSheet {
+  --poi-sheet-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --poi-sheet-expand: 0.48s;
+  --poi-sheet-radius-dur: 0.72s;
+  --poi-sheet-radius-ease: cubic-bezier(0.45, 0.02, 0.32, 1);
+
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 243.85px;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 32px 32px 0 0;
+  background-color: white;
+  transform: translateY(100%);
+  transition:
+    transform 0.38s var(--poi-sheet-ease),
+    height var(--poi-sheet-expand) var(--poi-sheet-ease),
+    border-radius var(--poi-sheet-radius-dur) var(--poi-sheet-radius-ease);
+}
+
+#poiModal.poi-modal--open #poiModalSheet {
+  transform: translateY(0);
+}
+
+#poiModalSheet.poi-modal-sheet--detail {
+  height: 100dvh;
+  border-radius: 0;
+  background-color: #ffffff;
+}
+
+#poiModalSheet poi-modal-sheet {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+#poiModalSheet.poi-modal-sheet--detail poi-modal-sheet {
+  display: none;
+}
+
+#poiModalSheet poi-modal-sheet-detail {
+  display: none;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+#poiModalSheet.poi-modal-sheet--detail poi-modal-sheet-detail {
+  display: flex;
+  height: 100%;
+}
+
+.poiModalSheetCard {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  padding: 19px 18px 5px 18px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.poiModalSheetMain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.poiModalSheetHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.poiModalSheetTitle {
+  margin: 0;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #333333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.poiModalSheetBadge {
+  flex-shrink: 0;
+  border-radius: 10px;
+  font-size: 6px;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 16px;
+}
+
+.poiModalSheetBadge--available {
+  background: #26BDA9;
+}
+
+.poiModalSheetBadge--reserved {
+  background: #F8CC53;
+}
+
+.poiModalSheetBadge--sold {
+  background: #F17D59;
+}
+
+.poiModalSheetArea {
+  margin-top: 6px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.poiModalSheetMeta {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-top: 10px;
+  min-width: 0;
+  max-width: 100%;
+  height: 36px;
+  padding: 0 4px 0 0;
+  border-radius: 20px;
+  background: #F7F7F7;
+}
+
+.poiModalSheetMetaItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  height: 100%;
+  padding: 0 10px;
+  color: #484848;
+}
+
+.poiModalSheetMetaItem + .poiModalSheetMetaItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1px;
+  height: 22px;
+  transform: translateY(-50%);
+  background: #939393;
+  opacity: 0.35;
+}
+
+.poiModalSheetMetaItem + .poiModalSheetMetaItem::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: 22px;
+  transform: translateY(-50%);
+  background: #939393;
+  opacity: 0.35;
+}
+
+.poiModalSheetMetaValue {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  color: #484848;
+}
+
+.poiModalSheetMetaLabel {
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  color: #484848;
+}
+
+.poiModalSheetFavorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #939393;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.poiModalSheetFavorite--active {
+  color: #26BDA9;
+}
+
+.poiModalSheetFavorite:active {
+  transform: scale(0.94);
+}
+
+.poiModalSheetPrice {
+  margin-top: 11px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #26BDA9;
+}
+
+.poiModalSheetPrice--sold {
+  color: rgba(59, 59, 59, 0.1);
+}
+
+.poiModalSheetActions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-top: 5px;
+}
+
+.poiModalSheetBtn {
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.poiModalSheetBtn:active {
+  transform: scale(0.98);
+}
+
+.poiModalSheetBtnDetails {
+  min-width: 0;
+  width: 122px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 400;
+  color: #ffffff;
+  background: #26BDA9;
+}
+
+.poiModalSheetBtnDetails:hover {
+  background: #22ab98;
+}
+
+.poiModalSheetBtnTour {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 400;
+  color: #333333;
+  background: #F0F0F0;
+}
+
+.poiModalSheetBtnTour:hover {
+  background: #ececec;
+}
+
+.poiModalSheetBtnTour svg {
+  flex-shrink: 0;
+}
+
+.poiModalSheetPlan {
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.poiModalSheetPlanImg {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  max-height: 175px;
+  object-fit: contain;
+}
+
+.poiModalSheetPlanImg--fallback {
+  object-fit: cover;
+}
+
+.poiModalSheetPlanEmpty {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  border-radius: 12px;
+  background: #f3f3f3;
+}
+
+#poiModalDetailClose {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  color: #3a3a3a;
+  background: rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, background-color 0.2s ease;
+}
+
+#poiModalSheet.poi-modal-sheet--detail #poiModalDetailClose {
+  top: calc(27px + env(safe-area-inset-top, 0px));
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#poiModalDetailClose:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* ≥819px — мобильная шторка скрыта, используется poiModalDesk */
+@media screen and (min-width: 819px) {
+  #poiModal {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}

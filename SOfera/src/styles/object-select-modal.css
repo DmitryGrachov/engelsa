@@ -1,0 +1,164 @@
+/* Object select modal — выбор объекта */
+
+.objectSelectModalRoot {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 0.2s;
+}
+
+.objectSelectModalRoot.object-select-modal--open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+.objectSelectModalBackdrop {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}
+
+.objectSelectModalRoot object-select-view {
+    position: relative;
+    z-index: 1;
+    display: block;
+    pointer-events: auto;
+}
+
+.objectSelectView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.objectSelectPanel {
+    box-sizing: border-box;
+    width: 177px;
+    height: 164px;
+    padding: 14px 26px;
+    border-radius: 12px;
+    background: #242424;
+    color: #ffffff;
+}
+
+.objectSelectPanelHead {
+    margin-bottom: 15px;
+}
+
+.objectSelectPanelTitle,
+.objectSelectPanelBrand {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.objectSelectPanelBrand {
+    margin-top: 2px;
+}
+
+.objectSelectPanelOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.objectSelectPanelOption {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px;
+    background: #5a5a5a;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 400;
+    color: #F2F2F2;
+    text-align: center;
+}
+
+button.objectSelectPanelOption {
+    cursor: pointer;
+}
+
+.objectSelectPanelOption--active {
+    background: #f0f0f0;
+    color: #333333;
+}
+
+.objectSelectClose {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    margin: 36px 0 0;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.objectSelectCloseIcon {
+    width: 31px;
+    height: 31px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Desktop */
+
+.objectSelectModalRoot--desktop .objectSelectPanel {
+    width: 260px;
+    height: 240px;
+    padding: 20px 36px;
+    border-radius: 18px;
+}
+
+.objectSelectModalRoot--desktop .objectSelectPanelHead {
+    margin-bottom: 22px;
+}
+
+.objectSelectModalRoot--desktop .objectSelectPanelTitle,
+.objectSelectModalRoot--desktop .objectSelectPanelBrand {
+    font-size: 16px;
+}
+
+.objectSelectModalRoot--desktop .objectSelectPanelBrand {
+    margin-top: 4px;
+}
+
+.objectSelectModalRoot--desktop .objectSelectPanelOptions {
+    gap: 12px;
+}
+
+.objectSelectModalRoot--desktop .objectSelectPanelOption {
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+}
+
+.objectSelectModalRoot--desktop .objectSelectClose {
+    width: 48px;
+    height: 48px;
+    margin-top: 44px;
+}
+
+.objectSelectModalRoot--desktop .objectSelectCloseIcon {
+    width: 36px;
+    height: 36px;
+}

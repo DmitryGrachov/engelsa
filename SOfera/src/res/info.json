@@ -1,0 +1,1011 @@
+[
+    {
+        "id": 0,
+        "floor": 1,
+        "number": 1,
+        "square": 38,
+        "cost": 4200000,
+        "status": "active"
+    },
+    {
+        "id": 1,
+        "floor": 1,
+        "number": 2,
+        "square": 42,
+        "cost": 4600000,
+        "status": "reserved"
+    },
+    {
+        "id": 2,
+        "floor": 1,
+        "number": 3,
+        "square": 55,
+        "cost": 5900000,
+        "status": "active"
+    },
+    {
+        "id": 3,
+        "floor": 1,
+        "number": 4,
+        "square": 62,
+        "cost": 6600000,
+        "status": "active"
+    },
+    {
+        "id": 4,
+        "floor": 2,
+        "number": 5,
+        "square": 48,
+        "cost": 5200000,
+        "status": "active"
+    },
+    {
+        "id": 5,
+        "floor": 2,
+        "number": 6,
+        "square": 72,
+        "cost": 7200000,
+        "status": "active"
+    },
+    {
+        "id": 6,
+        "floor": 2,
+        "number": 7,
+        "square": 80,
+        "cost": 7800000,
+        "status": "active"
+    },
+    {
+        "id": 7,
+        "floor": 2,
+        "number": 8,
+        "square": 65,
+        "cost": 6900000,
+        "status": "active"
+    },
+    {
+        "id": 8,
+        "floor": 3,
+        "number": 9,
+        "square": 50,
+        "cost": 5600000,
+        "status": "active"
+    },
+    {
+        "id": 9,
+        "floor": 3,
+        "number": 10,
+        "square": 44,
+        "cost": 4900000,
+        "status": "reserved",
+        "planImage": "./assets/status/reserver.svg"
+    },
+    {
+        "id": 10,
+        "floor": 3,
+        "number": 11,
+        "square": 58,
+        "cost": 6100000,
+        "status": "active"
+    },
+    {
+        "id": 11,
+        "floor": 3,
+        "number": 12,
+        "square": 76,
+        "cost": 8100000,
+        "status": "active"
+    },
+    {
+        "id": 12,
+        "floor": 4,
+        "number": 13,
+        "square": 39,
+        "cost": 4300000,
+        "status": "active"
+    },
+    {
+        "id": 13,
+        "floor": 4,
+        "number": 14,
+        "square": 53,
+        "cost": 5700000,
+        "status": "active"
+    },
+    {
+        "id": 14,
+        "floor": 4,
+        "number": 15,
+        "square": 68,
+        "cost": 7100000,
+        "status": "active"
+    },
+    {
+        "id": 15,
+        "floor": 4,
+        "number": 16,
+        "square": 47,
+        "cost": 5100000,
+        "status": "active"
+    },
+    {
+        "id": 16,
+        "floor": 5,
+        "number": 17,
+        "square": 60,
+        "cost": 6400000,
+        "status": "active"
+    },
+    {
+        "id": 17,
+        "floor": 5,
+        "number": 18,
+        "square": 82,
+        "cost": 8400000,
+        "status": "active"
+    },
+    {
+        "id": 18,
+        "floor": 5,
+        "number": 19,
+        "square": 41,
+        "cost": 4500000,
+        "status": "active"
+    },
+    {
+        "id": 19,
+        "floor": 5,
+        "number": 20,
+        "square": 57,
+        "cost": 6000000,
+        "status": "reserved"
+    },
+    {
+        "id": 20,
+        "floor": 6,
+        "number": 21,
+        "square": 74,
+        "cost": 7900000,
+        "status": "active"
+    },
+    {
+        "id": 21,
+        "floor": 6,
+        "number": 22,
+        "square": 49,
+        "cost": 5300000,
+        "status": "active"
+    },
+    {
+        "id": 22,
+        "floor": 6,
+        "number": 23,
+        "square": 63,
+        "cost": 6800000,
+        "status": "active"
+    },
+    {
+        "id": 23,
+        "floor": 6,
+        "number": 24,
+        "square": 79,
+        "cost": 8300000,
+        "status": "reserved"
+    },
+    {
+        "id": 24,
+        "floor": 7,
+        "number": 25,
+        "square": 45,
+        "cost": 5000000,
+        "status": "active"
+    },
+    {
+        "id": 25,
+        "floor": 7,
+        "number": 26,
+        "square": 67,
+        "cost": 7050000,
+        "status": "active"
+    },
+    {
+        "id": 26,
+        "floor": 7,
+        "number": 27,
+        "square": 52,
+        "cost": 5500000,
+        "status": "sold"
+    },
+    {
+        "id": 27,
+        "floor": 7,
+        "number": 28,
+        "square": 73,
+        "cost": 7700000,
+        "status": "active"
+    },
+    {
+        "id": 28,
+        "floor": 8,
+        "number": 29,
+        "square": 40,
+        "cost": 4400000,
+        "status": "active"
+    },
+    {
+        "id": 29,
+        "floor": 8,
+        "number": 30,
+        "square": 61,
+        "cost": 6500000,
+        "status": "reserved"
+    },
+    {
+        "id": 30,
+        "floor": 8,
+        "number": 31,
+        "square": 77,
+        "cost": 8200000,
+        "status": "active"
+    },
+    {
+        "id": 31,
+        "floor": 8,
+        "number": 32,
+        "square": 54,
+        "cost": 5800000,
+        "status": "active"
+    },
+    {
+        "id": 32,
+        "floor": 9,
+        "number": 33,
+        "square": 69,
+        "cost": 7300000,
+        "status": "active"
+    },
+    {
+        "id": 33,
+        "floor": 9,
+        "number": 34,
+        "square": 43,
+        "cost": 4700000,
+        "status": "active"
+    },
+    {
+        "id": 34,
+        "floor": 9,
+        "number": 35,
+        "square": 81,
+        "cost": 8500000,
+        "status": "active"
+    },
+    {
+        "id": 35,
+        "floor": 9,
+        "number": 36,
+        "square": 59,
+        "cost": 6200000,
+        "status": "active"
+    },
+    {
+        "id": 36,
+        "floor": 10,
+        "number": 37,
+        "square": 46,
+        "cost": 5100000,
+        "status": "sold"
+    },
+    {
+        "id": 37,
+        "floor": 10,
+        "number": 38,
+        "square": 71,
+        "cost": 7500000,
+        "status": "active"
+    },
+    {
+        "id": 38,
+        "floor": 10,
+        "number": 39,
+        "square": 83,
+        "cost": 8700000,
+        "status": "active"
+    },
+    {
+        "id": 39,
+        "floor": 10,
+        "number": 40,
+        "square": 51,
+        "cost": 5600000,
+        "status": "active"
+    },
+    {
+        "id": 40,
+        "floor": 11,
+        "number": 41,
+        "square": 64,
+        "cost": 6900000,
+        "status": "active"
+    },
+    {
+        "id": 41,
+        "floor": 11,
+        "number": 42,
+        "square": 78,
+        "cost": 8400000,
+        "status": "sold"
+    },
+    {
+        "id": 42,
+        "floor": 11,
+        "number": 43,
+        "square": 42,
+        "cost": 4700000,
+        "status": "active"
+    },
+    {
+        "id": 43,
+        "floor": 11,
+        "number": 44,
+        "square": 57,
+        "cost": 6100000,
+        "status": "active"
+    },
+    {
+        "id": 44,
+        "floor": 12,
+        "number": 45,
+        "square": 74,
+        "cost": 7900000,
+        "status": "active"
+    },
+    {
+        "id": 45,
+        "floor": 12,
+        "number": 46,
+        "square": 49,
+        "cost": 5400000,
+        "status": "active"
+    },
+    {
+        "id": 46,
+        "floor": 12,
+        "number": 47,
+        "square": 66,
+        "cost": 7100000,
+        "status": "reserved"
+    },
+    {
+        "id": 47,
+        "floor": 12,
+        "number": 48,
+        "square": 84,
+        "cost": 8900000,
+        "status": "sold"
+    },
+    {
+        "id": 48,
+        "floor": 13,
+        "number": 49,
+        "square": 53,
+        "cost": 5800000,
+        "status": "active"
+    },
+    {
+        "id": 49,
+        "floor": 13,
+        "number": 50,
+        "square": 72,
+        "cost": 7600000,
+        "status": "active"
+    },
+    {
+        "id": 50,
+        "floor": 13,
+        "number": 51,
+        "square": 88,
+        "cost": 9300000,
+        "status": "active"
+    },
+    {
+        "id": 51,
+        "floor": 13,
+        "number": 52,
+        "square": 61,
+        "cost": 6700000,
+        "status": "active"
+    },
+    {
+        "id": 52,
+        "floor": 14,
+        "number": 53,
+        "square": 44,
+        "cost": 4900000,
+        "status": "reserved"
+    },
+    {
+        "id": 53,
+        "floor": 14,
+        "number": 54,
+        "square": 69,
+        "cost": 7300000,
+        "status": "sold"
+    },
+    {
+        "id": 54,
+        "floor": 14,
+        "number": 55,
+        "square": 82,
+        "cost": 8800000,
+        "status": "active"
+    },
+    {
+        "id": 55,
+        "floor": 14,
+        "number": 56,
+        "square": 56,
+        "cost": 6100000,
+        "status": "reserved"
+    },
+    {
+        "id": 56,
+        "floor": 15,
+        "number": 57,
+        "square": 47,
+        "cost": 5200000,
+        "status": "sold"
+    },
+    {
+        "id": 57,
+        "floor": 15,
+        "number": 58,
+        "square": 73,
+        "cost": 7700000,
+        "status": "active"
+    },
+    {
+        "id": 58,
+        "floor": 15,
+        "number": 59,
+        "square": 86,
+        "cost": 9200000,
+        "status": "reserved"
+    },
+    {
+        "id": 59,
+        "floor": 15,
+        "number": 60,
+        "square": 51,
+        "cost": 5700000,
+        "status": "sold"
+    },
+    {
+        "id": 60,
+        "floor": 16,
+        "number": 61,
+        "square": 63,
+        "cost": 6900000,
+        "status": "active"
+    },
+    {
+        "id": 61,
+        "floor": 16,
+        "number": 62,
+        "square": 78,
+        "cost": 8400000,
+        "status": "reserved"
+    },
+    {
+        "id": 62,
+        "floor": 16,
+        "number": 63,
+        "square": 42,
+        "cost": 4700000,
+        "status": "sold"
+    },
+    {
+        "id": 63,
+        "floor": 16,
+        "number": 64,
+        "square": 58,
+        "cost": 6300000,
+        "status": "active"
+    },
+    {
+        "id": 64,
+        "floor": 17,
+        "number": 65,
+        "square": 75,
+        "cost": 8000000,
+        "status": "reserved"
+    },
+    {
+        "id": 65,
+        "floor": 17,
+        "number": 66,
+        "square": 48,
+        "cost": 5300000,
+        "status": "sold"
+    },
+    {
+        "id": 66,
+        "floor": 17,
+        "number": 67,
+        "square": 67,
+        "cost": 7200000,
+        "status": "active"
+    },
+    {
+        "id": 67,
+        "floor": 17,
+        "number": 68,
+        "square": 84,
+        "cost": 9000000,
+        "status": "reserved"
+    },
+    {
+        "id": 68,
+        "floor": 18,
+        "number": 69,
+        "square": 53,
+        "cost": 5900000,
+        "status": "sold"
+    },
+    {
+        "id": 69,
+        "floor": 18,
+        "number": 70,
+        "square": 71,
+        "cost": 7600000,
+        "status": "active"
+    },
+    {
+        "id": 70,
+        "floor": 18,
+        "number": 71,
+        "square": 88,
+        "cost": 9500000,
+        "status": "reserved"
+    },
+    {
+        "id": 71,
+        "floor": 18,
+        "number": 72,
+        "square": 45,
+        "cost": 5000000,
+        "status": "sold"
+    },
+    {
+        "id": 72,
+        "floor": 19,
+        "number": 73,
+        "square": 62,
+        "cost": 6800000,
+        "status": "active"
+    },
+    {
+        "id": 73,
+        "floor": 19,
+        "number": 74,
+        "square": 79,
+        "cost": 8500000,
+        "status": "reserved"
+    },
+    {
+        "id": 74,
+        "floor": 19,
+        "number": 75,
+        "square": 43,
+        "cost": 4800000,
+        "status": "sold"
+    },
+    {
+        "id": 75,
+        "floor": 19,
+        "number": 76,
+        "square": 59,
+        "cost": 6400000,
+        "status": "active"
+    },
+    {
+        "id": 76,
+        "floor": 20,
+        "number": 77,
+        "square": 74,
+        "cost": 8100000,
+        "status": "reserved"
+    },
+    {
+        "id": 77,
+        "floor": 20,
+        "number": 78,
+        "square": 49,
+        "cost": 5500000,
+        "status": "sold"
+    },
+    {
+        "id": 78,
+        "floor": 20,
+        "number": 79,
+        "square": 66,
+        "cost": 7100000,
+        "status": "active"
+    },
+    {
+        "id": 79,
+        "floor": 20,
+        "number": 80,
+        "square": 83,
+        "cost": 8900000,
+        "status": "reserved"
+    },
+    {
+        "id": 80,
+        "floor": 21,
+        "number": 81,
+        "square": 52,
+        "cost": 5800000,
+        "status": "sold"
+    },
+    {
+        "id": 81,
+        "floor": 21,
+        "number": 82,
+        "square": 70,
+        "cost": 7500000,
+        "status": "active"
+    },
+    {
+        "id": 82,
+        "floor": 21,
+        "number": 83,
+        "square": 87,
+        "cost": 9400000,
+        "status": "reserved"
+    },
+    {
+        "id": 83,
+        "floor": 21,
+        "number": 84,
+        "square": 46,
+        "cost": 5100000,
+        "status": "sold"
+    },
+    {
+        "id": 84,
+        "floor": 22,
+        "number": 85,
+        "square": 64,
+        "cost": 7000000,
+        "status": "active"
+    },
+    {
+        "id": 85,
+        "floor": 22,
+        "number": 86,
+        "square": 81,
+        "cost": 8700000,
+        "status": "reserved"
+    },
+    {
+        "id": 86,
+        "floor": 22,
+        "number": 87,
+        "square": 41,
+        "cost": 4600000,
+        "status": "sold"
+    },
+    {
+        "id": 87,
+        "floor": 22,
+        "number": 88,
+        "square": 57,
+        "cost": 6200000,
+        "status": "active"
+    },
+    {
+        "id": 88,
+        "floor": 23,
+        "number": 89,
+        "square": 76,
+        "cost": 8200000,
+        "status": "reserved"
+    },
+    {
+        "id": 89,
+        "floor": 23,
+        "number": 90,
+        "square": 50,
+        "cost": 5600000,
+        "status": "sold"
+    },
+    {
+        "id": 90,
+        "floor": 23,
+        "number": 91,
+        "square": 68,
+        "cost": 7300000,
+        "status": "active"
+    },
+    {
+        "id": 91,
+        "floor": 23,
+        "number": 92,
+        "square": 85,
+        "cost": 9100000,
+        "status": "reserved"
+    },
+    {
+        "id": 92,
+        "floor": 24,
+        "number": 93,
+        "square": 54,
+        "cost": 6000000,
+        "status": "sold"
+    },
+    {
+        "id": 93,
+        "floor": 24,
+        "number": 94,
+        "square": 72,
+        "cost": 7800000,
+        "status": "active"
+    },
+    {
+        "id": 94,
+        "floor": 24,
+        "number": 95,
+        "square": 89,
+        "cost": 9600000,
+        "status": "reserved"
+    },
+    {
+        "id": 95,
+        "floor": 24,
+        "number": 96,
+        "square": 47,
+        "cost": 5200000,
+        "status": "sold"
+    },
+    {
+        "id": 96,
+        "floor": 25,
+        "number": 97,
+        "square": 65,
+        "cost": 7100000,
+        "status": "active"
+    },
+    {
+        "id": 97,
+        "floor": 25,
+        "number": 98,
+        "square": 82,
+        "cost": 8800000,
+        "status": "reserved"
+    },
+    {
+        "id": 98,
+        "floor": 25,
+        "number": 99,
+        "square": 42,
+        "cost": 4700000,
+        "status": "sold"
+    },
+    {
+        "id": 99,
+        "floor": 25,
+        "number": 100,
+        "square": 58,
+        "cost": 6300000,
+        "status": "active"
+    },
+    {
+        "id": 100,
+        "floor": 26,
+        "number": 101,
+        "square": 77,
+        "cost": 8300000,
+        "status": "reserved"
+    },
+    {
+        "id": 101,
+        "floor": 26,
+        "number": 102,
+        "square": 51,
+        "cost": 5700000,
+        "status": "sold"
+    },
+    {
+        "id": 102,
+        "floor": 26,
+        "number": 103,
+        "square": 69,
+        "cost": 7400000,
+        "status": "active"
+    },
+    {
+        "id": 103,
+        "floor": 26,
+        "number": 104,
+        "square": 86,
+        "cost": 9200000,
+        "status": "reserved"
+    },
+    {
+        "id": 104,
+        "floor": 27,
+        "number": 105,
+        "square": 55,
+        "cost": 6100000,
+        "status": "sold"
+    },
+    {
+        "id": 105,
+        "floor": 27,
+        "number": 106,
+        "square": 73,
+        "cost": 7900000,
+        "status": "active"
+    },
+    {
+        "id": 106,
+        "floor": 27,
+        "number": 107,
+        "square": 90,
+        "cost": 9800000,
+        "status": "reserved"
+    },
+    {
+        "id": 107,
+        "floor": 27,
+        "number": 108,
+        "square": 48,
+        "cost": 5300000,
+        "status": "sold"
+    },
+    {
+        "id": 108,
+        "floor": 28,
+        "number": 109,
+        "square": 66,
+        "cost": 7200000,
+        "status": "active"
+    },
+    {
+        "id": 109,
+        "floor": 28,
+        "number": 110,
+        "square": 83,
+        "cost": 8900000,
+        "status": "reserved"
+    },
+    {
+        "id": 110,
+        "floor": 28,
+        "number": 111,
+        "square": 43,
+        "cost": 4800000,
+        "status": "sold"
+    },
+    {
+        "id": 111,
+        "floor": 28,
+        "number": 112,
+        "square": 59,
+        "cost": 6400000,
+        "status": "active"
+    },
+    {
+        "id": 112,
+        "floor": 29,
+        "number": 113,
+        "square": 78,
+        "cost": 8400000,
+        "status": "reserved"
+    },
+    {
+        "id": 113,
+        "floor": 29,
+        "number": 114,
+        "square": 52,
+        "cost": 5800000,
+        "status": "sold"
+    },
+    {
+        "id": 114,
+        "floor": 29,
+        "number": 115,
+        "square": 70,
+        "cost": 7600000,
+        "status": "active"
+    },
+    {
+        "id": 115,
+        "floor": 29,
+        "number": 116,
+        "square": 87,
+        "cost": 9400000,
+        "status": "reserved"
+    },
+    {
+        "id": 116,
+        "floor": 30,
+        "number": 117,
+        "square": 46,
+        "cost": 5100000,
+        "status": "sold"
+    },
+    {
+        "id": 117,
+        "floor": 30,
+        "number": 118,
+        "square": 63,
+        "cost": 6900000,
+        "status": "active"
+    },
+    {
+        "id": 118,
+        "floor": 30,
+        "number": 119,
+        "square": 81,
+        "cost": 8700000,
+        "status": "reserved"
+    },
+    {
+        "id": 119,
+        "floor": 30,
+        "number": 120,
+        "square": 44,
+        "cost": 4900000,
+        "status": "sold"
+    },
+    {
+        "id": 120,
+        "floor": 31,
+        "number": 121,
+        "square": 60,
+        "cost": 6600000,
+        "status": "active"
+    },
+    {
+        "id": 121,
+        "floor": 31,
+        "number": 122,
+        "square": 84,
+        "cost": 9000000,
+        "status": "reserved"
+    },
+    {
+        "id": 122,
+        "floor": 31,
+        "number": 123,
+        "square": 49,
+        "cost": 5500000,
+        "status": "sold"
+    },
+    {
+        "id": 123,
+        "floor": 31,
+        "number": 124,
+        "square": 67,
+        "cost": 7300000,
+        "status": "active"
+    },
+    {
+        "id": 124,
+        "floor": 32,
+        "number": 125,
+        "square": 88,
+        "cost": 9700000,
+        "status": "reserved"
+    },
+    {
+        "id": 125,
+        "floor": 32,
+        "number": 126,
+        "square": 56,
+        "cost": 6200000,
+        "status": "sold"
+    }
+]

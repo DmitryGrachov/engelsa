@@ -1,0 +1,958 @@
+/* Account desk favorites — десктопное избранное в accountDeskPanel */
+
+#accountModalDesk.accountModalRoot--desktop account-desk-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.accountDeskView {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    padding:
+        calc(27px + env(safe-area-inset-top, 0px))
+        max(58px, env(safe-area-inset-right, 0px))
+        calc(150px + env(safe-area-inset-bottom, 0px))
+        max(58px, env(safe-area-inset-left, 0px));
+}
+
+/* Top bar */
+
+.accountDeskFavoritesTopBar {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+    margin-bottom: 45px;
+}
+
+.accountDeskFavoritesLogo {
+    display: block;
+    height: 26px;
+    width: 90px;
+    flex-shrink: 0;
+}
+
+.accountDeskFavoritesMortgageBtn {
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    min-height: 50px;
+    padding: 0 28px;
+    border: none;
+    border-radius: 40px;
+    background: #26BDA9;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesMortgageBtn:hover {
+    background: #45d9b0;
+}
+
+.accountDeskFavoritesMortgageBtn:active {
+    transform: scale(0.98);
+}
+
+.accountDeskFavoritesTopBarRight {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    justify-self: end;
+}
+
+.accountDeskFavoritesUserWrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+button.accountDeskFavoritesUser {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    margin: 0;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button.accountDeskFavoritesUser:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+button.accountDeskFavoritesUser[aria-expanded="true"] {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.accountDeskFavoritesAvatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: block;
+    object-fit: contain;
+}
+
+.accountDeskFavoritesUserText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.accountDeskFavoritesGreeting {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333333;
+    white-space: nowrap;
+}
+
+.accountDeskFavoritesUserId {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #8D8D8D;
+    white-space: nowrap;
+}
+
+.accountDeskFavoritesUserMenuLayer {
+    position: fixed;
+    inset: 0;
+    z-index: 118;
+    pointer-events: none;
+}
+
+.accountDeskFavoritesUserMenuBackdrop {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: rgba(26, 26, 26, 0.8);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.accountDeskFavoritesUserMenuHost {
+    position: absolute;
+    top: max(100px, env(safe-area-inset-top, 0px));
+    right: max(210px, env(safe-area-inset-right, 0px));
+    display: block;
+    pointer-events: auto;
+}
+
+.accountDeskFavoritesUserMenu {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 284px;
+    max-width: calc(100vw - 116px);
+    height: 488px;
+    max-height: calc(100dvh - 116px);
+    padding: 32px 38px;
+    border-radius: 26px;
+    background: #ffffff;
+    color: #333333;
+}
+
+.accountDeskFavoritesUserMenuClose {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: #F6F6F6;
+    color: #606060;
+    cursor: pointer;
+}
+
+.accountDeskFavoritesUserMenuCloseIcon {
+    display: block;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 300;
+    margin-top: -1px;
+}
+
+.accountDeskFavoritesUserMenuProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 52px;
+    text-align: center;
+}
+
+.accountDeskFavoritesUserMenuAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.accountDeskFavoritesUserMenuAvatarImg {
+    display: block;
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.accountDeskFavoritesUserMenuUserText {
+    min-width: 0;
+}
+
+.accountDeskFavoritesUserMenuUserName {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #333333;
+}
+
+.accountDeskFavoritesUserMenuUserId {
+    margin: 5px 0 0;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #8d8d8d;
+}
+
+.accountDeskFavoritesUserMenuNav {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0 8px;
+}
+
+.accountDeskFavoritesUserMenuNavItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 26px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    color: #686868;
+    text-align: left;
+    cursor: pointer;
+}
+
+.accountDeskFavoritesUserMenuNavIcon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.accountDeskFavoritesUserMenuLogin {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+    margin: 26px 0 0;
+    padding: 0 8px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #686868;
+    cursor: pointer;
+}
+
+.accountDeskFavoritesUserMenuLoginIcon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.accountDeskFavoritesClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border: 2px solid #AAAAAA;
+    border-radius: 50%;
+    color: #AAAAAA;
+    background: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesClose:hover {
+    background: #f7f7f7;
+}
+
+.accountDeskFavoritesClose:active {
+    transform: scale(0.96);
+}
+
+/* Headline */
+
+.accountDeskFavoritesHeadline {
+    flex-shrink: 0;
+    margin-bottom: 17px;
+}
+
+.accountDeskFavoritesTitle {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.accountDeskFavoritesSubtitle {
+    margin: 13px 0 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: #9E9D9D;
+}
+
+/* Tabs */
+
+.accountDeskFavoritesTabs {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+    margin-bottom: 35px;
+    padding-top: 6px;
+}
+
+.accountDeskFavoritesTab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 12px 47px;
+    border: none;
+    border-radius: 22px;
+    background: #D9D9D9;
+    color: #373737;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+    overflow: visible;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.accountDeskFavoritesTab--active {
+    background: #3D3D3D;
+    color: #FFFFFF;
+}
+
+.accountDeskFavoritesTabLabel {
+    position: relative;
+    z-index: 0;
+}
+
+.accountDeskFavoritesTabBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    transform: translate(28%, -32%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* Toolbar */
+
+.accountDeskFavoritesToolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-shrink: 0;
+    margin-bottom: 28px;
+}
+
+.accountDeskFavoritesToolbarLeft,
+.accountDeskFavoritesToolbarRight {
+    display: flex;
+    align-items: center;
+    gap: 52px;
+    min-width: 0;
+}
+
+.accountDeskFavoritesSectionHead {
+    min-width: 0;
+}
+
+.accountDeskFavoritesSectionTitle {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.accountDeskFavoritesSectionCount {
+    margin: 2px 0 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.accountDeskFavoritesOffersBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 45px;
+    padding: 13px 22px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    color: #000000;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    border: none;
+}
+
+.accountDeskFavoritesOffersBtn:hover {
+    background: #fafafa;
+}
+
+.accountDeskFavoritesOffersBtn:active {
+    transform: scale(0.98);
+}
+
+.accountDeskFavoritesOffersBtnIcon {
+    width: 15px;
+    height: 15px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Sort — как filterGroupVariantsMobSort, крупнее */
+
+.accountDeskFavoritesToolbarRight > account-desk-favorites-sort {
+    display: block;
+    min-width: 0;
+}
+
+.accountDeskFavoritesSort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.accountDeskFavoritesSortLead {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+}
+
+.accountDeskFavoritesSortLabel {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.accountDeskFavoritesSortReset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesSortReset:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.accountDeskFavoritesSortReset:active {
+    transform: scale(0.94);
+}
+
+.accountDeskFavoritesSortResetIcon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+}
+
+.accountDeskFavoritesSortOptions {
+    display: inline-flex;
+    align-items: center;
+    gap: 31px;
+    min-width: 0;
+}
+
+.accountDeskFavoritesSortBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #b0b0b0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.accountDeskFavoritesSortBtn--active {
+    color: #000000;
+}
+
+.accountDeskFavoritesSortBtnIcon {
+    display: block;
+    flex-shrink: 0;
+    transform: rotate(0deg);
+    transition: transform 0.15s ease;
+}
+
+.accountDeskFavoritesSortBtn--active .accountDeskFavoritesSortBtnIcon {
+    color: #000000;
+}
+
+.accountDeskFavoritesSortBtn--active[data-direction="desc"] .accountDeskFavoritesSortBtnIcon {
+    transform: rotate(180deg);
+}
+
+.accountDeskFavoritesCompareBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 20px;
+    background: #333333;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesCompareBtn:hover {
+    background: #444444;
+}
+
+.accountDeskFavoritesCompareBtn:active {
+    transform: scale(0.98);
+}
+
+/* Grid */
+
+.accountDeskFavoritesGrid {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-x pan-y;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+    padding-right: 20px;
+}
+
+#accountModalDesk.accountModalRoot--desktop .accountDeskFavoritesGrid::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+    height: 6px;
+}
+
+#accountModalDesk.accountModalRoot--desktop .accountDeskFavoritesGrid::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.accountDeskFavoritesGrid > account-desk-favorites-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+}
+
+.accountDeskFavoritesGrid > account-desk-favorites-card > .accountDeskFavoritesCard {
+    flex: 1 1 auto;
+    height: 100%;
+}
+
+/* Card */
+
+.accountDeskFavoritesCard {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    padding: 62px 32px 0;
+    border-radius: 27px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.accountDeskFavoritesCardFavorite {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid #E5E5E5;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #E5E5E5;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesCardFavorite--active {
+    color: #26BDA9;
+}
+
+.accountDeskFavoritesCardFavorite:active {
+    transform: scale(0.94);
+}
+
+.accountDeskFavoritesCardPlan {
+    display: block;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.accountDeskFavoritesCardPlan .filterMobCardPlanSection {
+    flex-shrink: 0;
+    min-height: 330px;
+}
+
+.accountDeskFavoritesCardPlan .filterMobCardPlan {
+    box-sizing: border-box;
+    height: 300px;
+    min-height: 300px;
+    padding-top: 0;
+    touch-action: pan-y;
+}
+
+.accountDeskFavoritesCardPlan .filterMobCardPlanWrap {
+    box-sizing: border-box;
+    height: 300px;
+    min-height: 300px;
+    touch-action: pan-y;
+}
+
+#accountModalDesk .accountDeskFavoritesCardPlan .filterMobCardPlanWrap--swipeable {
+    touch-action: pan-y;
+}
+
+.accountDeskFavoritesCardPlan .filterMobCardPlanImg {
+    width: 100%;
+    max-width: 327px;
+    height: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.accountDeskFavoritesCardPlan .filterMobCardPlanDots {
+    margin-top: 12px;
+}
+
+.accountDeskFavoritesCardTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 22px;
+    margin-bottom: 20px;
+}
+
+.accountDeskFavoritesCardTag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    padding: 2px 10px;
+    border: 1px solid #4E4E4E;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #4E4E4E;
+    background: #ffffff;
+    white-space: nowrap;
+}
+
+.accountDeskFavoritesCardHead {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 23px;
+}
+
+.accountDeskFavoritesCardTitle {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #242424;
+}
+
+.accountDeskFavoritesCardBadge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 2px 18px;
+    border-radius: 13px;
+    font-size: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.accountDeskFavoritesCardBadge--available {
+    background: #26BDA9;
+    color: #FFFFFF;
+}
+
+.accountDeskFavoritesCardBadge--reserved {
+    background: #F8CC53;
+    color: #FFFFFF;
+}
+
+.accountDeskFavoritesCardBadge--sold {
+    background: #F27D59;
+    color: #FFFFFF;
+}
+
+.accountDeskFavoritesCardMeta {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: #9E9D9D;
+}
+
+.accountDeskFavoritesCardPrice {
+    margin: 0 0 28px;
+    font-size: 36px;
+    font-weight: 500;
+    color: #26BDA9;
+    flex: 1 1 auto;
+}
+
+.accountDeskFavoritesCardSecondaryActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 14px;
+}
+
+.accountDeskFavoritesCardSecondaryBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 41px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 28px;
+    background: #E5E5E5;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 400;
+    color: #000000;
+    cursor: pointer;
+}
+
+.accountDeskFavoritesCardSecondaryBtnIcon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.accountDeskFavoritesCardDetailsBtn {
+    width: 100%;
+    min-height: 52px;
+    margin-top: auto;
+    border: none;
+    border-radius: 50px;
+    background: #26BDA9;
+    color: #F5F5F5;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesCardDetailsBtn:hover {
+    background: #45d9b0;
+}
+
+.accountDeskFavoritesCardDetailsBtn:active {
+    transform: scale(0.98);
+}
+
+.accountDeskFavoritesCardFooter {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: calc(100% + 64px);
+    min-height: 44px;
+    margin: 14px -32px 0;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 0 0 27px 27px;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+    background: #2A2A2A;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesCardFooter:hover {
+    background: #343434;
+}
+
+.accountDeskFavoritesCardFooter:active {
+    transform: scale(0.995);
+}
+
+.accountDeskFavoritesCardFooter--active {
+    background: #1f1f1f;
+}
+
+.accountDeskFavoritesCardFooterIcon {
+    display: block;
+    width: 14px;
+    height: 16px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 1280px) {
+    .accountDeskFavoritesGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .accountDeskFavoritesGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .accountDeskFavoritesTopBar {
+        grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .accountDeskFavoritesMortgageBtn {
+        justify-self: start;
+    }
+
+    .accountDeskFavoritesTopBarRight {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .accountDeskFavoritesToolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .accountDeskFavoritesToolbarLeft,
+    .accountDeskFavoritesToolbarRight {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .accountDeskFavoritesGrid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

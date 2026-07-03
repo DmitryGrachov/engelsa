@@ -1,0 +1,1143 @@
+/* Filter group variants modal — варианты внутри plan_group_id */
+
+.filterGroupVariantsModalRoot {
+    position: fixed;
+    inset: 0;
+    z-index: 117;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 0.38s;
+}
+
+.filterGroupVariantsModalRoot.filter-group-variants-modal--open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+/* ——— Mobile ——— */
+
+#filterGroupVariantsModal.filterGroupVariantsModalRoot--mobile {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+    max-height: 100vh;
+    max-height: 100dvh;
+    padding: 0;
+    background: #f3f3f3;
+    color: #2a2a2a;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+#filterGroupVariantsModal.filterGroupVariantsModalRoot--mobile filter-group-variants-mob-view {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-top: max(28px, env(safe-area-inset-top));
+    padding-right: max(46px, env(safe-area-inset-right));
+    padding-left: max(46px, env(safe-area-inset-left));
+    padding-bottom: 0;
+}
+
+#filterGroupVariantsModal.filterGroupVariantsModalRoot--mobile > filter-group-variants-mob-offers-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    pointer-events: none;
+}
+
+#filterGroupVariantsModal.filterGroupVariantsModalRoot--mobile *,
+#filterGroupVariantsModal.filterGroupVariantsModalRoot--mobile *::before,
+#filterGroupVariantsModal.filterGroupVariantsModalRoot--mobile *::after {
+    touch-action: manipulation;
+}
+
+.filterGroupVariantsMobView {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Header — 1:1 с filterResultsMobHeader */
+
+.filterGroupVariantsMobHeader {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding: 0px 0 28px;
+}
+
+.filterGroupVariantsMobClose {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsMobCloseIcon {
+    width: 31px;
+    height: 31px;
+    display: block;
+    object-fit: contain;
+}
+
+.filterGroupVariantsMobTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin: 0;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.filterGroupVariantsMobTitleLabel {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.filterGroupVariantsMobTitleCount {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.filterGroupVariantsMobOffersBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+    padding-bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+    background: rgba(243, 243, 243, 0.28);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    pointer-events: none;
+}
+
+.filterGroupVariantsMobOffersBtn {
+    pointer-events: auto;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 40px;
+    padding: 12px 30px;
+    border: 1px solid #d8d8d8;
+    border-radius: 53px;
+    background: #FFFFFF;
+    color: #000000;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsMobOffersBtnText {
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.filterGroupVariantsMobOffersBtnIcon {
+    width: 15px;
+    height: 15px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Sort bar */
+
+.filterGroupVariantsMobSort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-shrink: 0;
+    margin: 0 0 18px;
+    min-width: 0;
+    margin-top: 18px;
+}
+
+.filterGroupVariantsMobSortLead {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsMobSortLabel {
+    font-size: 10px;
+    font-weight: 500;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsMobSortReset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #000000;
+    cursor: pointer;
+}
+
+.filterGroupVariantsMobSortResetIcon {
+    display: block;
+}
+
+.filterGroupVariantsMobSortOptions {
+    display: inline-flex;
+    align-items: center;
+    gap: 23px;
+    min-width: 0;
+}
+
+.filterGroupVariantsMobSortBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1;
+    color: #b0b0b0;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsMobSortBtn--active {
+    color: #000000;
+}
+
+.filterGroupVariantsMobSortBtnIcon {
+    display: block;
+    flex-shrink: 0;
+    transform: rotate(0deg);
+    transition: transform 0.15s ease;
+}
+
+.filterGroupVariantsMobSortBtn--active .filterGroupVariantsMobSortBtnIcon {
+    color: #000000;
+}
+
+.filterGroupVariantsMobSortBtn--active[data-direction="desc"] .filterGroupVariantsMobSortBtnIcon {
+    transform: rotate(180deg);
+}
+
+.filterGroupVariantsMobScrollArea {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.filterGroupVariantsMobList {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+    padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+}
+
+.filterGroupVariantsMobList > filter-group-variant-card {
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Variant card (mobile) */
+
+.filterGroupVariantCard {
+    gap: 10px;
+    padding-top: 14px;
+}
+
+.filterGroupVariantCard > filter-group-variant-favorite-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+}
+
+.filterGroupVariantCardFavorite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid #E5E5E5;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #E5E5E5;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.filterGroupVariantCardFavorite svg {
+    width: 18px;
+    height: 18px;
+}
+
+.filterGroupVariantCardFavorite--active {
+    color: #26BDA9;
+}
+
+.filterGroupVariantCardFavorite:active {
+    transform: scale(0.94);
+}
+
+.filterGroupVariantCardPlan .filterMobCardPlan {
+    padding-top: 38px;
+}
+
+.filterGroupVariantCardBadge {
+    position: absolute;
+    top: 23px;
+    left: 31px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.filterGroupVariantCardBadge--available {
+    background: #26BDA9;
+    color: #FFFFFF;
+}
+
+.filterGroupVariantCardBadge--reserved {
+    background: #F8CC53;
+    color: #FFFFFF;
+}
+
+.filterGroupVariantCardBadge--sold {
+    background: #F27D59;
+    color: #FFFFFF;
+}
+
+/* ——— Desktop ——— */
+
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: #f3f3f3;
+    color: #2a2a2a;
+    overflow: hidden;
+    pointer-events: auto;
+    touch-action: manipulation;
+}
+
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop *,
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop *::before,
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop *::after {
+    touch-action: manipulation;
+}
+
+.filterGroupVariantsModalRoot--desktop.filter-group-variants-modal--open {
+    pointer-events: auto;
+}
+
+.filterGroupVariantsDeskPanel {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background: transparent;
+    pointer-events: auto;
+    transform: none;
+    transition: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.filterGroupVariantsModalRoot--desktop filter-group-variants-desk-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.filterGroupVariantsDeskView {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    padding:
+        calc(27px + env(safe-area-inset-top, 0px))
+        max(58px, env(safe-area-inset-right, 0px))
+        calc(150px + env(safe-area-inset-bottom, 0px))
+        max(58px, env(safe-area-inset-left, 0px));
+}
+
+.filterGroupVariantsDeskHeadRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 16px 24px;
+    flex-shrink: 0;
+    margin-bottom: 28px;
+}
+
+.filterGroupVariantsDeskHeadRow .filterResultsDeskHeadline {
+    grid-column: 1;
+    justify-self: start;
+    margin-bottom: 0;
+    min-width: 0;
+}
+
+.filterGroupVariantsDeskTitleMain {
+    font-size: 36px;
+    font-weight: 400;
+    color: #333333;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsDeskTitleCount {
+    font-size: 32px;
+    font-weight: 500;
+    color: #333333;
+    margin-top: 4px;
+}
+
+.filterGroupVariantsDeskHeadRow .filterGroupVariantsDeskViewToggle {
+    grid-column: 2;
+    justify-self: center;
+}
+
+.filterGroupVariantsDeskHeadRow > filter-group-variants-desk-sort {
+    grid-column: 3;
+    justify-self: end;
+    min-width: 0;
+}
+
+.filterGroupVariantsDeskViewToggle {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 999px;
+    background: inherit;
+    gap: 4px;
+    width: fit-content;
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsDeskViewToggleBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 124px;
+    height: 35px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    color: #313131;
+    cursor: pointer;
+    background: #E4E4E4;
+}
+
+.filterGroupVariantsDeskViewToggleIcon {
+    display: block;
+    flex-shrink: 0;
+    opacity: 0.72;
+}
+
+.filterGroupVariantsDeskViewToggleBtn--active .filterGroupVariantsDeskViewToggleIcon {
+    opacity: 1;
+}
+
+.filterGroupVariantsDeskViewToggleBtn--active {
+    background: #ffffff;
+    color: #333333;
+}
+
+.filterGroupVariantsDeskViewToggleBtn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.filterGroupVariantsDeskSort {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsDeskSortReset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.filterGroupVariantsDeskSortReset:hover {
+    opacity: 0.72;
+}
+
+.filterGroupVariantsDeskSortReset:active {
+    transform: scale(0.94);
+}
+
+.filterGroupVariantsDeskSortResetIcon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.filterGroupVariantsDeskSortLabel {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 0.7);
+    white-space: nowrap;
+}
+
+.filterGroupVariantsDeskSortTriggerWrap {
+    position: relative;
+}
+
+.filterGroupVariantsDeskSortTrigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 170px;
+    height: 35px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 20px;
+    background: #333333;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.filterGroupVariantsDeskSortTriggerIcon {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsDeskSortBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: default;
+}
+
+.filterGroupVariantsDeskSortPopover {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    width: min(250px, calc(100vw - 116px));
+    padding: 65px 20px 20px 20px;
+    border-radius: 24px;
+    background: #2d2d2d;
+    color: #ffffff;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.filterGroupVariantsDeskSortPopoverClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.filterGroupVariantsDeskSortOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 23px;
+}
+
+.filterGroupVariantsDeskSortOption {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    color: #F5F5F5;
+    text-align: left;
+    cursor: pointer;
+}
+
+.filterGroupVariantsDeskSortOptionRadio {
+    width: 25px;
+    height: 25px;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsDeskSortOption--active .filterGroupVariantsDeskSortOptionRadio {
+    border-color: #26BDA9;
+    box-shadow: inset 0 0 0 5px #2d2d2d, inset 0 0 0 15px #26BDA9;
+}
+
+.filterGroupVariantsDeskSortDirections {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filterGroupVariantsDeskSortDirectionBtn {
+    width: 100%;
+    min-height: 40px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    background: #242424;
+    border: 1px solid #242424;
+}
+
+.filterGroupVariantsDeskSortDirectionBtn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.filterGroupVariantsDeskSortDirectionBtn--active {
+    border-color: #26BDA9;
+}
+
+.filterGroupVariantsDeskGrid {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-x pan-y;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+    padding-right: 20px;
+}
+
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop .filterGroupVariantsDeskGrid::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+    height: 6px;
+}
+
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop .filterGroupVariantsDeskGrid::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.filterGroupVariantsDeskGrid > filter-group-variants-desk-variant-card {
+    display: block;
+    min-width: 0;
+    height: 100%;
+}
+
+/* Desktop variant card */
+
+.filterGroupVariantsDeskCard {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    padding: 62px 32px 40px 32px;
+    border-radius: 27px;
+    background: #ffffff;
+}
+
+.filterGroupVariantsDeskCard > filter-group-variant-favorite-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 1;
+}
+
+.filterGroupVariantsDeskCardFavorite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid #E5E5E5;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #E5E5E5;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.filterGroupVariantsDeskCardFavorite--active {
+    color: #26BDA9;
+}
+
+.filterGroupVariantsDeskCardFavorite:active {
+    transform: scale(0.94);
+}
+
+.filterGroupVariantsDeskCardPlan {
+    display: block;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.filterGroupVariantsDeskCardPlan .filterMobCardPlanSection {
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsDeskCardPlan .filterMobCardPlan {
+    box-sizing: border-box;
+    height: 300px;
+    min-height: 300px;
+    padding-top: 0;
+    touch-action: pan-y;
+}
+
+.filterGroupVariantsDeskCardPlan .filterMobCardPlanWrap {
+    box-sizing: border-box;
+    height: 300px;
+    min-height: 300px;
+    touch-action: pan-y;
+}
+
+#filterGroupVariantsModalDesk .filterGroupVariantsDeskCardPlan .filterMobCardPlanWrap--swipeable {
+    touch-action: pan-y;
+}
+
+.filterGroupVariantsDeskCardPlan .filterMobCardPlanImg {
+    width: 100%;
+    max-width: 327px;
+    height: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.filterGroupVariantsDeskCardPlan .filterMobCardPlanDots {
+    margin-top: 12px;
+}
+
+.filterGroupVariantsDeskCardTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.filterGroupVariantsDeskCardTag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    padding: 2px 10px;
+    border: 1px solid #4E4E4E;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #4E4E4E;
+    background: #ffffff;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsDeskCardHead {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 23px;
+}
+
+.filterGroupVariantsDeskCardTitle {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #242424;
+}
+
+.filterGroupVariantsDeskCardBadge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 2px 18px;
+    border-radius: 13px;
+    font-size: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsDeskCardBadge--available {
+    background: #26BDA9;
+    color: #FFFFFF;
+}
+
+.filterGroupVariantsDeskCardBadge--reserved {
+    background: #F8CC53;
+    color: #FFFFFF;
+}
+
+.filterGroupVariantsDeskCardBadge--sold {
+    background: #F27D59;
+    color: #FFFFFF;
+}
+
+.filterGroupVariantsDeskCardMeta {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: #9E9D9D;
+}
+
+.filterGroupVariantsDeskCardPrice {
+    margin: 0 0 28px;
+    font-size: 36px;
+    font-weight: 500;
+    color: #26BDA9;
+}
+
+.filterGroupVariantsDeskCardSecondaryActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 14px;
+}
+
+.filterGroupVariantsDeskCardSecondaryBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 41px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 28px;
+    background: #E5E5E5;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 400;
+    color: #000000;
+    cursor: pointer;
+}
+
+.filterGroupVariantsDeskCardSecondaryBtnIcon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.filterGroupVariantsDeskCardDetailsBtn {
+    width: 100%;
+    min-height: 52px;
+    margin-top: auto;
+    border: none;
+    border-radius: 50px;
+    background: #26BDA9;
+    color: #F5F5F5;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.filterGroupVariantsDeskCardDetailsBtn:hover {
+    background: #45d9b0;
+}
+
+.filterGroupVariantsDeskCardDetailsBtn:active {
+    transform: scale(0.98);
+}
+
+@media screen and (max-width: 1280px) {
+    .filterGroupVariantsDeskGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .filterGroupVariantsDeskGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .filterGroupVariantsDeskGrid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Desktop list view */
+
+.filterGroupVariantsDeskListScroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop .filterGroupVariantsDeskListScroll::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+}
+
+#filterGroupVariantsModalDesk.filterGroupVariantsModalRoot--desktop .filterGroupVariantsDeskListScroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.filterGroupVariantsDeskListHead,
+.filterGroupVariantsDeskListRow {
+    display: grid;
+    grid-template-columns:
+        minmax(78px, 0.75fr)
+        minmax(96px, 0.85fr)
+        minmax(92px, 0.85fr)
+        minmax(148px, 1.35fr)
+        minmax(64px, 0.55fr)
+        minmax(54px, 0.5fr)
+        minmax(92px, 0.75fr)
+        minmax(300px, auto);
+    gap: 16px;
+    align-items: center;
+}
+
+.filterGroupVariantsDeskListHead {
+    flex-shrink: 0;
+    margin-bottom: 19px;
+    padding: 0 46px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333333;
+    min-width: 980px;
+}
+
+.filterGroupVariantsDeskListHeadActions {
+    display: block;
+}
+
+.filterGroupVariantsDeskListBody {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 980px;
+}
+
+.filterGroupVariantsDeskListBody > filter-group-variants-desk-list-row {
+    display: block;
+}
+
+.filterGroupVariantsDeskListRow {
+    box-sizing: border-box;
+    min-height: 85px;
+    padding: 10px 46px;
+    border-radius: 22px;
+    background: #ffffff;
+}
+
+.filterGroupVariantsDeskListCell {
+    min-width: 0;
+    font-size: 16px;
+    color: #333333;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsDeskListCell--price {
+    font-weight: 400;
+}
+
+.filterGroupVariantsDeskListCell--status {
+    color: #333333;
+}
+
+.filterGroupVariantsDeskListActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filterGroupVariantsDeskListActionBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px 23px;
+    border: none;
+    border-radius: 15px;
+    background: #D9D9D9;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: #333333;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.filterGroupVariantsDeskListActionBtn--icon {
+    padding-right: 12px;
+}
+
+.filterGroupVariantsDeskListActionBtnIcon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.filterGroupVariantsDeskListActions > filter-group-variant-favorite-btn {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.filterGroupVariantsDeskListFavorite {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #D9D9D9;
+    color: #333333;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.filterGroupVariantsDeskListFavorite--active {
+    color: #26BDA9;
+}
+
+.filterGroupVariantsDeskListFavorite:active {
+    transform: scale(0.94);
+}
+
+@media screen and (max-width: 960px) {
+    .filterGroupVariantsDeskHeadRow {
+        grid-template-columns: 1fr;
+    }
+
+    .filterGroupVariantsDeskHeadRow .filterResultsDeskHeadline,
+    .filterGroupVariantsDeskHeadRow .filterGroupVariantsDeskViewToggle,
+    .filterGroupVariantsDeskHeadRow > filter-group-variants-desk-sort {
+        grid-column: 1;
+        justify-self: stretch;
+    }
+
+    .filterGroupVariantsDeskViewToggle {
+        justify-content: center;
+    }
+
+    .filterGroupVariantsDeskSort {
+        justify-content: space-between;
+    }
+
+    .filterGroupVariantsDeskListHead {
+        display: none;
+    }
+
+    .filterGroupVariantsDeskListRow {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .filterGroupVariantsDeskListActions {
+        justify-content: flex-start;
+    }
+}

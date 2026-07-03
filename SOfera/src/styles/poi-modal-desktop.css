@@ -1,0 +1,602 @@
+/* POI desktop — панель слева <poi-modal-desk-panel>, fullscreen <poi-modal-sheet-detail> */
+
+.poiModalDeskRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 114;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 0.42s;
+}
+
+.poiModalDeskRoot.poi-modal-desk--open {
+  visibility: visible;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+#ui #poiModalDesk {
+  pointer-events: none !important;
+}
+
+#ui #poiModalDesk .poiModalDeskPanel {
+  pointer-events: auto !important;
+}
+
+.poiModalDeskPanel {
+  position: fixed;
+  top: 50%;
+  left: 58px;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: 745px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  border-radius: 45px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+  pointer-events: auto;
+  transform: translate(calc(-100% - 58px), -50%);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.poiModalDeskRoot.poi-modal-desk--open .poiModalDeskPanel {
+  transform: translate(0, -50%);
+}
+
+.poiModalDeskRoot.poi-modal-desk--fs-open .poiModalDeskPanel {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.poiModalDeskPanel poi-modal-desk-panel {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+/* Fullscreen detail — <poi-modal-desk-detail> */
+.poiModalDeskFs {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #ffffff;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.poiModalDeskFs.poi-modal-desk-fs--open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+.poiModalDeskFs poi-modal-desk-detail {
+  display: none;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  pointer-events: auto;
+}
+
+.poiModalDeskFs.poi-modal-desk-fs--open poi-modal-desk-detail {
+  display: flex;
+}
+
+.poiModalDeskDetail {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.poiModalDeskDetailTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding:
+    calc(27px + env(safe-area-inset-top, 0px))
+    max(58px, env(safe-area-inset-right, 0px))
+    0
+    max(58px, env(safe-area-inset-left, 0px));
+}
+
+.poiModalDeskDetailLogo {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
+.poiModalDeskDetailBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #AAAAAA;
+  border-radius: 50%;
+  color: #AAAAAA;
+  background: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.poiModalDeskDetailBack:hover {
+  background: #f7f7f7;
+}
+
+.poiModalDeskDetailBack:active {
+  transform: scale(0.96);
+}
+
+.poiModalDeskDetailBody {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr) minmax(280px, 360px);
+  gap: 32px;
+  flex: 1;
+  min-height: 0;
+  padding:
+    24px
+    max(58px, env(safe-area-inset-right, 0px))
+    calc(20px + env(safe-area-inset-bottom, 0px))
+    max(58px, env(safe-area-inset-left, 0px));
+}
+
+.poiModalDeskDetailInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  justify-content: center;
+}
+
+.poiModalDeskDetailInfoHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.poiModalDeskDetailTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.poiModalDeskDetailTitle {
+  margin: 0;
+  font-family: inherit;
+  font-size: 32px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.poiModalDeskDetailNumber {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+  background: #282828;
+}
+
+.poiModalDeskDetailArea {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.poiModalDeskDetailBadge {
+  display: inline-flex;
+  padding: 7px 18px;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-top: 6px;
+}
+
+.poiModalDeskDetailBadge--available {
+  background: #26BDA9;
+}
+
+.poiModalDeskDetailBadge--reserved {
+  background: #F8CC53;
+}
+
+.poiModalDeskDetailBadge--sold {
+  background: #F27D59;
+}
+
+.poiModalDeskDetailSpecs {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  margin: 22px 0 0;
+  padding: 0;
+}
+
+.poiModalDeskDetailSpec {
+  margin: 0;
+}
+
+.poiModalDeskDetailSpecLabel {
+  font-size: 28px;
+  font-weight: 400;
+  color: #939393;
+}
+
+.poiModalDeskDetailSpecValue {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.poiModalDeskDetailActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 48px;
+}
+
+.poiModalDeskDetailActionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 40px;
+  padding: 0 19px;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  background: #EFEFEF;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.poiModalDeskDetailActionBtn:hover {
+  background: #e8e8e8;
+}
+
+.poiModalDeskDetailActionBtn--active {
+  color: #26BDA9;
+}
+
+.poiModalDeskDetailActionBtn:active {
+  transform: scale(0.98);
+}
+
+.poiModalDeskDetailFeatures {
+  margin-top: 51px;
+}
+
+.poiModalDeskDetailFeaturesTitle {
+  margin: 0 0 22px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.poiModalDeskDetailFeatureTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.poiModalDeskDetailFeatureTag {
+  padding: 8px 14px;
+  border: 1.2px solid #D9D9D9;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  background: #ffffff;
+}
+
+.poiModalDeskDetailVisual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  gap: 24px;
+}
+
+.poiModalDeskDetailPlanWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.poiModalDeskDetailPlanImg {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: min(62vh, 520px);
+  object-fit: contain;
+  object-position: center;
+}
+
+.poiModalDeskDetailPlanImg--fallback {
+  width: 100%;
+  height: auto;
+  max-height: min(62vh, 532px);
+  object-fit: contain;
+  object-position: center top;
+}
+
+.poiModalDeskDetailPlanEmpty {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 20px;
+  background: #f3f3f3;
+}
+
+.poiModalDeskDetailTourBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  height: 48px;
+  padding: 0 23px;
+  border: none;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  color: #000000;
+  background: #F6F6F6;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.poiModalDeskDetailTourBtn:hover {
+  background: #e8e8e8;
+}
+
+.poiModalDeskDetailTourBtn:active {
+  transform: scale(0.98);
+}
+
+.poiModalDeskDetailViewTabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border-radius: 49px;
+  background: #484848;
+  flex-shrink: 0;
+}
+
+.poiModalDeskDetailViewTab {
+  margin: 0;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.poiModalDeskDetailViewTab--active {
+  color: #333333;
+  background: #ffffff;
+}
+
+.poiModalDeskDetailPriceCard {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 94px;
+  align-self: center;
+  width: 100%;
+  max-width: 360px;
+  padding: 32px 28px;
+  border-radius: 40px;
+  background: #FAFAFA;
+}
+
+.poiModalDeskDetailPriceBlock,
+.poiModalDeskDetailMortgageBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.poiModalDeskDetailPriceLabel {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 400;
+  color: #3F3F3F;
+}
+
+.poiModalDeskDetailMortgageLabel {
+  font-size: 26px;
+  font-weight: 500;
+  color: #3F3F3F;
+}
+
+.poiModalDeskDetailPriceValue {
+  margin: 8px 0 0;
+  font-size: 36px;
+  font-weight: 700;
+  color: #26BDA9;
+}
+
+.poiModalDeskDetailPriceValue--sold {
+  color: rgba(59, 59, 59, 0.1);
+}
+
+.poiModalDeskDetailPricePerSqm {
+  margin: 6px 0 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #757373;
+}
+
+.poiModalDeskDetailBookBtn {
+  width: 100%;
+  height: 50px;
+  margin-top: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 40px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  background: #26BDA9;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.poiModalDeskDetailBookBtn:hover {
+  background: #22ab98;
+}
+
+.poiModalDeskDetailBookBtn--reserved {
+  background: rgba(248, 204, 83, 0.4);
+  color: rgba(255, 255, 255, 1);
+}
+
+.poiModalDeskDetailBookBtn--reserved:hover {
+  background: rgba(248, 204, 83, 0.4);
+}
+
+.poiModalDeskDetailBookBtn--sold {
+  background: rgba(38, 189, 169, 0.2);
+  color: rgba(255, 255, 255, 1);
+}
+
+.poiModalDeskDetailBookBtn--sold:hover {
+  background: rgba(38, 189, 169, 0.2);
+}
+
+.poiModalDeskDetailBookBtn:active {
+  transform: scale(0.98);
+}
+
+.poiModalDeskDetailMortgageValue {
+  margin: 8px 0 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: #3F3F3F;
+}
+
+.poiModalDeskDetailCalcBtn {
+  width: 100%;
+  height: 52px;
+  margin-top: 36px;
+  padding: 0 16px;
+  border: 1px solid #3F3F3F;
+  border-radius: 40px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F3F3F;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.poiModalDeskDetailCalcBtn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.poiModalDeskDetailCalcBtn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 1200px) {
+  .poiModalDeskDetailBody {
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) minmax(260px, 320px);
+    gap: 24px;
+  }
+
+  .poiModalDeskDetailTitle {
+    font-size: 24px;
+  }
+
+  .poiModalDeskDetailSpecValue {
+    font-size: 28px;
+  }
+
+  .poiModalDeskDetailPriceValue {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .poiModalDeskPanel {
+    width: 342px;
+    height: 671px;
+    border-radius: 44px;
+  }
+}
+
+@media (max-width: 818px) {
+  .poiModalDeskRoot,
+  .poiModalDeskFs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 819px) and (max-width: 899px) {
+  .poiModalDeskPanel {
+    transform: translate(calc(-100% - 58px), -50%) scale(0.88);
+    transform-origin: left center;
+  }
+
+  .poiModalDeskRoot.poi-modal-desk--open .poiModalDeskPanel {
+    transform: translate(0, -50%) scale(0.88);
+    transform-origin: left center;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 899px) {
+  .poiModalDeskPanel {
+    transform: translate(calc(-100% - 58px), -50%) scale(0.6666667);
+    transform-origin: left center;
+  }
+
+  .poiModalDeskRoot.poi-modal-desk--open .poiModalDeskPanel {
+    transform: translate(0, -50%) scale(0.6666667);
+    transform-origin: left center;
+  }
+}
