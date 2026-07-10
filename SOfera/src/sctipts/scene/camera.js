@@ -556,6 +556,8 @@ export const FLOOR_PLAN_PANEL_OPEN_ORBIT_DIST = 1;
 export const FLOOR_PLAN_PANEL_OPEN_ORBIT_DIST_MOBILE = 1;
 /** Поворот орбиты вправо при открытии панели без выбора (градусы вокруг Y). */
 export const FLOOR_PLAN_PANEL_OPEN_ORBIT_YAW_DEG = 30;
+/** То же на узкой вьюпорте. */
+export const FLOOR_PLAN_PANEL_OPEN_ORBIT_YAW_DEG_MOBILE = 50;
 
 /**
  * Центрирование на метке квартиры: фиксированная дистанция, камера чуть сверху (как кадр плейна).
@@ -576,7 +578,9 @@ export const computeFloorPlanApartmentNudgePick = (worldPosition, cameraEntity, 
             ? FLOOR_PLAN_APARTMENT_ORBIT_DIST_MOBILE
             : FLOOR_PLAN_APARTMENT_ORBIT_DIST);
     const orbitYawDeg = panelOpenDefault
-        ? FLOOR_PLAN_PANEL_OPEN_ORBIT_YAW_DEG
+        ? (isPoiNarrowViewport()
+            ? FLOOR_PLAN_PANEL_OPEN_ORBIT_YAW_DEG_MOBILE
+            : FLOOR_PLAN_PANEL_OPEN_ORBIT_YAW_DEG)
         : FLOOR_PLAN_APARTMENT_ORBIT_YAW_DEG;
 
     const pickTarget = cameraEntity.getPosition().clone();
