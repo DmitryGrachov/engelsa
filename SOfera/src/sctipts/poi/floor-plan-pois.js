@@ -16,7 +16,7 @@ const FLOOR_PLAN_POI_UI_SCALE_MIN_MOBILE = 0.42;
 const FLOOR_PLAN_POI_UI_SCALE_MAX_MOBILE = 1;
 const FLOOR_PLAN_POI_UI_SCALE_SMOOTH_MOBILE = 0.2;
 /** Квартира, к которой подлетает камера при открытии поэтажных планов (без выбора). */
-const DEFAULT_FLOOR_PLAN_APARTMENT_NUMBER = 35;
+const DEFAULT_FLOOR_PLAN_APARTMENT_NUMBER = 88;
 
 /**
  * @param {import('../../lib/index.js').main extends (...args: unknown[]) => Promise<infer V> ? V : never | undefined} viewer
