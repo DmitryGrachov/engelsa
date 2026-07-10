@@ -281,7 +281,9 @@ export const createFloorPlanPois = (app, floorPlanData, options) => {
             return;
 
         const cameraEntity = getMainCamera(app);
-        const flyPick = computeFloorPlanApartmentNudgePick(worldPosition, cameraEntity);
+        const flyPick = computeFloorPlanApartmentNudgePick(worldPosition, cameraEntity, {
+            panelOpenDefault: true
+        });
 
         if (!flyPick)
             return;

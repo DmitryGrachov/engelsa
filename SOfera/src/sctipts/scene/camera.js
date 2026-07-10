@@ -193,7 +193,7 @@ export const INTEREST_SECTION_ORBIT_YAW_DEG = -50;
  * Точка обзора при включении «Поиск» с панели (мировые координаты, без POI-меша).
  * Подкручивай x/y/z и дистанцию (`PANEL_SEARCH_ORBIT_DIST_XZ*`) отдельно.
  */
-export const PANEL_SEARCH_FOCUS_TARGET = { x: 1.3, y: 0.5, z: -0.1};
+export const PANEL_SEARCH_FOCUS_TARGET = { x: 1.3, y: 0.5, z: -0.1 };
 
 /**
  * Горизонтальное направление подлёта для «Поиск» с панели.
@@ -542,20 +542,42 @@ export const computeFloorPlanPlaneCameraPick = (hitMeshInstance, cameraEntity, a
 };
 
 /**
- * Фиксированная 3D-дистанция подлёта к метке квартиры (одинакова при любом угле камеры).
+ * Фиксированная 3D-дистанция подлёта к метке квартиры при выборе квартиры (клик / POI_BOX).
+ * Нижний порог — `minD` (0.4) в `computeFloorPlanApartmentNudgePick`.
  */
 export const FLOOR_PLAN_APARTMENT_ORBIT_DIST = 0.2;
 /** То же на узкой вьюпорте. */
 export const FLOOR_PLAN_APARTMENT_ORBIT_DIST_MOBILE = 0.2;
+/** Поворот орбиты при выборе квартиры (0 — как раньше, без сдвига). */
+export const FLOOR_PLAN_APARTMENT_ORBIT_YAW_DEG = 0;
+
+/** Дистанция при первом открытии панели без выбранной квартиры. */
+export const FLOOR_PLAN_PANEL_OPEN_ORBIT_DIST = 1;
+export const FLOOR_PLAN_PANEL_OPEN_ORBIT_DIST_MOBILE = 1;
+/** Поворот орбиты вправо при открытии панели без выбора (градусы вокруг Y). */
+export const FLOOR_PLAN_PANEL_OPEN_ORBIT_YAW_DEG = 30;
 
 /**
  * Центрирование на метке квартиры: фиксированная дистанция, камера чуть сверху (как кадр плейна).
  * @param {{ x: number; y: number; z: number }} worldPosition
+ * @param {{ panelOpenDefault?: boolean }} [options] `panelOpenDefault` — ракурс при открытии без выбора.
  * @returns {{ target: import('playcanvas').Vec3; fromPos: import('playcanvas').Vec3 } | null}
  */
-export const computeFloorPlanApartmentNudgePick = (worldPosition, cameraEntity) => {
+export const computeFloorPlanApartmentNudgePick = (worldPosition, cameraEntity, options = {}) => {
     if (!cameraEntity || !worldPosition)
         return null;
+
+    const panelOpenDefault = options.panelOpenDefault === true;
+    const orbitDist = panelOpenDefault
+        ? (isPoiNarrowViewport()
+            ? FLOOR_PLAN_PANEL_OPEN_ORBIT_DIST_MOBILE
+            : FLOOR_PLAN_PANEL_OPEN_ORBIT_DIST)
+        : (isPoiNarrowViewport()
+            ? FLOOR_PLAN_APARTMENT_ORBIT_DIST_MOBILE
+            : FLOOR_PLAN_APARTMENT_ORBIT_DIST);
+    const orbitYawDeg = panelOpenDefault
+        ? FLOOR_PLAN_PANEL_OPEN_ORBIT_YAW_DEG
+        : FLOOR_PLAN_APARTMENT_ORBIT_YAW_DEG;
 
     const pickTarget = cameraEntity.getPosition().clone();
 
@@ -565,12 +587,7 @@ export const computeFloorPlanApartmentNudgePick = (worldPosition, cameraEntity) 
 
     const camWorld = cameraEntity.getPosition();
     const minD = 0.4;
-    const desiredDist = Math.max(
-        minD,
-        isPoiNarrowViewport()
-            ? FLOOR_PLAN_APARTMENT_ORBIT_DIST_MOBILE
-            : FLOOR_PLAN_APARTMENT_ORBIT_DIST
-    );
+    const desiredDist = Math.max(minD, orbitDist);
 
     const { outX, outZ } = horizontalTowardCamera(
         camWorld,
@@ -579,9 +596,11 @@ export const computeFloorPlanApartmentNudgePick = (worldPosition, cameraEntity) 
         minD * 12
     );
 
-    let hx = outX;
+    const yawed = rotateHorizontalOffsetAroundY(outX, outZ, orbitYawDeg);
+
+    let hx = yawed.x;
     let hy = FLOOR_PLAN_PLANE_VIEW_PITCH_Y;
-    let hz = outZ;
+    let hz = yawed.z;
     const hlen = Math.hypot(hx, hy, hz) || 1;
 
     hx /= hlen;
