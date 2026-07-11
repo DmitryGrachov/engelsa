@@ -66,6 +66,7 @@ export const createPoiModalDesktop = () => {
         deskPanel.floorPlanSrc = resolvePoiModalFloorPlanSrc(info);
         deskPanel.cardFallbackSrc = resolvePoiModalDeskCardFallbackSrc(info);
         deskPanel.favorite = isFavorite(info?.id);
+        deskPanel.showSliceBtn = true;
         deskPanel.tagsExpanded = false;
         deskPanel.viewMode = 'layout';
         deskPanel.info = info;
@@ -137,6 +138,7 @@ export const createPoiModalDesktop = () => {
     };
 
     let onCloseHook = () => {};
+    let onSliceHook = () => {};
 
     /** @param {{ resetPoiHighlight?: boolean }} [opts] */
     const close = (opts = {}) => {
@@ -155,6 +157,7 @@ export const createPoiModalDesktop = () => {
         deskPanel.floorPlanSrc = '';
         deskPanel.cardFallbackSrc = '';
         deskPanel.favorite = false;
+        deskPanel.showSliceBtn = false;
         deskPanel.tagsExpanded = false;
         deskPanel.viewMode = 'layout';
 
@@ -224,6 +227,15 @@ export const createPoiModalDesktop = () => {
         openTour();
     });
 
+    deskPanel.addEventListener('poi-slice', e => {
+        e.stopPropagation();
+
+        if (!currentInfo)
+            return;
+
+        onSliceHook(currentInfo);
+    });
+
     deskPanel.addEventListener('poi-calculator', e => {
         e.stopPropagation();
     });
@@ -282,6 +294,9 @@ export const createPoiModalDesktop = () => {
         openTour,
         setOnClose(fn) {
             onCloseHook = typeof fn === 'function' ? fn : () => {};
+        },
+        setOnSlice(fn) {
+            onSliceHook = typeof fn === 'function' ? fn : () => {};
         }
     };
 };

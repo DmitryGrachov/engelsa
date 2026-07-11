@@ -38,6 +38,7 @@ class PoiModalDetailView extends BaseElement {
         floorPlanSrc: { type: String, attribute: 'floor-plan-src' },
         cardFallbackSrc: { type: String, attribute: 'card-fallback-src' },
         favorite: { type: Boolean, reflect: true },
+        showSliceBtn: { type: Boolean, attribute: 'show-slice-btn' },
         variant: { type: String, reflect: true },
         tagsExpanded: { type: Boolean, state: true },
         viewMode: { type: String, state: true }
@@ -51,6 +52,7 @@ class PoiModalDetailView extends BaseElement {
         this.floorPlanSrc = '';
         this.cardFallbackSrc = '';
         this.favorite = false;
+        this.showSliceBtn = false;
         /** @type {PoiModalDetailVariant} */
         this.variant = 'sheet';
         this.tagsExpanded = false;
@@ -131,6 +133,12 @@ class PoiModalDetailView extends BaseElement {
     _onTourClick(event) {
         this._stop(event);
         this._emit('poi-tour');
+    }
+
+    /** @param {Event} event */
+    _onSliceClick(event) {
+        this._stop(event);
+        this._emit('poi-slice');
     }
 
     /** @param {Event} event */
@@ -376,10 +384,10 @@ class PoiModalDetailView extends BaseElement {
     /** @param {PoiModalDetailVariant} variant @param {string} status */
     _renderFooter(variant, status) {
         if (variant === 'desk-panel') {
-            return html`
+            const tourBtn = html`
                 <button
                     type="button"
-                    class="poiModalDetailTourBtn"
+                    class="poiModalDetailTourBtn${this.showSliceBtn ? ' poiModalDetailTourBtn--grow' : ''}"
                     @click=${this._onTourClick}
                     @pointerdown=${this._stop}
                 >
@@ -391,6 +399,28 @@ class PoiModalDetailView extends BaseElement {
                     />
                     <span>Тур</span>
                 </button>
+            `;
+
+            return html`
+                ${this.showSliceBtn ? html`
+                    <div class="poiModalDetailTourRow">
+                        ${tourBtn}
+                        <button
+                            type="button"
+                            class="poiModalDetailTourBtn poiModalDetailTourBtn--compact"
+                            @click=${this._onSliceClick}
+                            @pointerdown=${this._stop}
+                        >
+                            <img
+                                class="poiModalDetailTourBtnIcon"
+                                src=${assetUrl('./assets/icons/slice.svg')}
+                                alt=""
+                                draggable="false"
+                            />
+                            <span>Срез</span>
+                        </button>
+                    </div>
+                ` : tourBtn}
 
                 <button
                     type="button"

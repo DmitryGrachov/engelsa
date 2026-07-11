@@ -549,6 +549,25 @@
   flex-shrink: 0;
 }
 
+.poiModalDetailTourRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  margin: 9px 0 0;
+}
+
+.poiModalDetailTourRow .poiModalDetailTourBtn {
+  margin: 0;
+}
+
+.poiModalDetailTourBtn--grow,
+.poiModalDetailTourBtn--compact {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+}
+
 .poiModalDetailTourBtn:hover {
   background: #e8e8e8;
 }

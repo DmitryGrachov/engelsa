@@ -137,6 +137,11 @@
     color: rgba(59, 59, 59, 0.1);
   }
 
+  .poiModalDetail--desk-panel .poiModalDetailTourRow {
+    margin-top: 23px;
+    gap: 7px;
+  }
+
   .poiModalDetail--desk-panel .poiModalDetailTourBtn {
     height: 49px;
     margin-top: 23px;
@@ -144,6 +149,10 @@
     font-size: 14px;
     font-weight: 400;
     background: #F2F2F2;
+  }
+
+  .poiModalDetail--desk-panel .poiModalDetailTourRow .poiModalDetailTourBtn {
+    margin-top: 0;
   }
 
   .poiModalDetail--desk-panel .poiModalDetailTourBtnIcon {
