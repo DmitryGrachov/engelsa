@@ -25,7 +25,8 @@ class PoiModalSheet extends BaseElement {
         info: { type: Object },
         planSrc: { type: String, attribute: 'plan-src' },
         cardFallbackSrc: { type: String, attribute: 'card-fallback-src' },
-        favorite: { type: Boolean, reflect: true }
+        favorite: { type: Boolean, reflect: true },
+        showSliceBtn: { type: Boolean, attribute: 'show-slice-btn' }
     };
 
     constructor() {
@@ -35,6 +36,7 @@ class PoiModalSheet extends BaseElement {
         this.planSrc = '';
         this.cardFallbackSrc = '';
         this.favorite = false;
+        this.showSliceBtn = false;
         /** @type {'plan' | 'fallback'} */
         this._planMode = 'plan';
     }
@@ -59,6 +61,12 @@ class PoiModalSheet extends BaseElement {
     _onTourClick(event) {
         this._stop(event);
         this.dispatchEvent(new CustomEvent('poi-tour', { bubbles: true }));
+    }
+
+    /** @param {Event} event */
+    _onSliceClick(event) {
+        this._stop(event);
+        this.dispatchEvent(new CustomEvent('poi-slice', { bubbles: true }));
     }
 
     /** @param {Event} event */
@@ -165,6 +173,22 @@ class PoiModalSheet extends BaseElement {
                             />
                             <span>Тур</span>
                         </button>
+                        ${this.showSliceBtn ? html`
+                            <button
+                                type="button"
+                                class="poiModalSheetBtn poiModalSheetBtnTour"
+                                @click=${this._onSliceClick}
+                                @pointerdown=${this._stop}
+                            >
+                                <img
+                                    class="poiModalSheetBtnTourIcon"
+                                    src=${assetUrl('./assets/icons/slice.svg')}
+                                    alt=""
+                                    draggable="false"
+                                />
+                                <span>Срез</span>
+                            </button>
+                        ` : ''}
                     </div>
                 </div>
 

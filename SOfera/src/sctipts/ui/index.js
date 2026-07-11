@@ -9,6 +9,7 @@ import { createAppShell } from './app-shell.js';
  *   interestPoisCtl: ReturnType<typeof import('../poi/interest-pois.js').createInterestPois>;
  *   plan2dPlanesCtl?: null | import('../floor-plan/plan-2d-glb.js').Plan2dPlanesCtl;
  *   floorPlanPoisCtl?: ReturnType<typeof import('../poi/floor-plan-pois.js').createFloorPlanPois> | null;
+ *   poiModal?: ReturnType<typeof import('../poi/modal/poi-modal.js').createPoiModal> | null;
  * }} deps
  */
 export function mountAppUi(viewer, deps) {

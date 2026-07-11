@@ -48,6 +48,7 @@ function scheduleIdle(/** @type {() => void} */ fn) {
  *   headerUi?: ReturnType<typeof import('./components/header.js').header> | null;
  *   plan2dPlanesCtl?: null | import('../floor-plan/plan-2d-glb.js').Plan2dPlanesCtl;
  *   floorPlanPoisCtl?: ReturnType<typeof import('../poi/floor-plan-pois.js').createFloorPlanPois> | null;
+ *   poiModal?: ReturnType<typeof import('../poi/modal/poi-modal.js').createPoiModal> | null;
  * }} deps
  */
 export function createAppShell(deps) {
@@ -57,7 +58,8 @@ export function createAppShell(deps) {
         viewer,
         headerUi,
         plan2dPlanesCtl,
-        floorPlanPoisCtl
+        floorPlanPoisCtl,
+        poiModal
     } = deps;
 
     const panelEntity = panel();
@@ -95,6 +97,14 @@ export function createAppShell(deps) {
     uiRoot?.appendChild(mapModeDock.mapTopViewDock);
     uiRoot?.appendChild(mapModeDock.mapInfraDock);
     uiRoot?.appendChild(floorPlansDock.root);
+
+    poiModal?.setOnSlice?.(info => {
+        if (!info)
+            return;
+
+        poiModal.close({ resetPoiHighlight: false });
+        floorPlansDock.openForPoi(info);
+    });
 
     function syncFloorPlansPanelUi() {
         const showFloorPlanPois = floorPlansDock.shouldShowFloorPlanPois();

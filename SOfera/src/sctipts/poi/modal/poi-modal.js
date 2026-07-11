@@ -52,6 +52,11 @@ export const createPoiModal = () => {
 
             mobile.setOnClose(f);
             desktop.setOnClose(f);
+        },
+        setOnSlice(fn) {
+            const f = typeof fn === 'function' ? fn : () => {};
+
+            mobile.setOnSlice(f);
         }
     };
 

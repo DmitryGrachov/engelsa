@@ -189,9 +189,7 @@ export function createFloorPlansDock(opts = {}) {
             viewer?.shiftFloorSliceRegionMaxLocalY?.(stepFloorPlansSliceY());
     });
 
-    floorPlansBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        const selectedPoi = poiBoxController?.getActivePoiInfo?.() ?? null;
+    const openFloorPlansForPoi = (/** @type {import('./lit/poi-modal/poi-modal-utils.js').PoiInfo | null | undefined} */ selectedPoi) => {
         const sliceFloors = plan2dPlanesCtl?.getSliceFloors?.() ?? [];
         const { step, apartment } = resolveFloorPlanOpenFromSelectedPoi(selectedPoi, sliceFloors);
 
@@ -205,6 +203,11 @@ export function createFloorPlansDock(opts = {}) {
         syncExpandedChrome();
         poiBoxController?.setMeshesVisible?.(false);
         notify();
+    };
+
+    floorPlansBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        openFloorPlansForPoi(poiBoxController?.getActivePoiInfo?.() ?? null);
     });
 
     floorPlansCloseWrap.addEventListener('click', e => {
@@ -250,6 +253,11 @@ export function createFloorPlansDock(opts = {}) {
             pendingApartmentOnOpen = null;
 
             return apartment;
+        },
+
+        /** @param {import('./lit/poi-modal/poi-modal-utils.js').PoiInfo | null | undefined} poiInfo */
+        openForPoi(poiInfo) {
+            openFloorPlansForPoi(poiInfo);
         },
 
         shouldShowFloorPlanPois() {

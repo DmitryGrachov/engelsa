@@ -64,6 +64,7 @@ export const createPoiModalMobile = () => {
         sheetCard.planSrc = resolvePoiModalPlanSrc(info);
         sheetCard.cardFallbackSrc = resolvePoiModalCardFallbackSrc(info);
         sheetCard.favorite = isFavorite(info?.id);
+        sheetCard.showSliceBtn = true;
         sheetCard.info = info;
     };
 
@@ -141,6 +142,7 @@ export const createPoiModalMobile = () => {
     };
 
     let onCloseHook = () => {};
+    let onSliceHook = () => {};
 
     /** @param {{ resetPoiHighlight?: boolean }} [opts] */
     const close = (opts = {}) => {
@@ -163,6 +165,7 @@ export const createPoiModalMobile = () => {
         sheetCard.planSrc = '';
         sheetCard.cardFallbackSrc = '';
         sheetCard.favorite = false;
+        sheetCard.showSliceBtn = false;
         sheetDetail.info = null;
         sheetDetail.planSrc = '';
         sheetDetail.floorPlanSrc = '';
@@ -216,6 +219,15 @@ export const createPoiModalMobile = () => {
         openTour();
     });
 
+    sheetCard.addEventListener('poi-slice', e => {
+        e.stopPropagation();
+
+        if (!currentInfo)
+            return;
+
+        onSliceHook(currentInfo);
+    });
+
     sheetCard.addEventListener('poi-favorite', e => {
         e.stopPropagation();
         syncFavorite(/** @type {CustomEvent} */ (e).detail?.favorite === true);
@@ -253,6 +265,9 @@ export const createPoiModalMobile = () => {
         openTour,
         setOnClose(fn) {
             onCloseHook = typeof fn === 'function' ? fn : () => {};
+        },
+        setOnSlice(fn) {
+            onSliceHook = typeof fn === 'function' ? fn : () => {};
         }
     };
 };

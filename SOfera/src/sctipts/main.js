@@ -78,7 +78,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         poiBoxController,
         interestPoisCtl,
         plan2dPlanesCtl,
-        floorPlanPoisCtl
+        floorPlanPoisCtl,
+        poiModal
     });
     bindFloorSliceUi(viewer);
 });
