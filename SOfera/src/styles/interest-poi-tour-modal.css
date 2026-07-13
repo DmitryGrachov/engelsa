@@ -1,9 +1,14 @@
-interest-poi-tour-view {
+/* #ui * { pointer-events: auto } в index.css — закрытый хост полностью убираем из hit-test */
+#ui interest-poi-tour-view:not([open]) {
+  display: none !important;
+}
+
+#ui interest-poi-tour-view[open] {
   position: fixed;
   inset: 0;
   z-index: 200;
   display: block;
-  pointer-events: none;
+  pointer-events: auto !important;
 }
 
 .interestPoiTourModalShell {
@@ -11,17 +16,6 @@ interest-poi-tour-view {
   inset: 0;
   box-sizing: border-box;
   background: transparent;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.24s ease, visibility 0s linear 0.24s;
-}
-
-.interestPoiTourModalShell.interestPoiTourModalShell--open {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-  transition-delay: 0s;
 }
 
 .interestPoiTourModalIframe {
@@ -50,8 +44,8 @@ interest-poi-tour-view {
   pointer-events: none;
 }
 
-#ui interest-poi-tour-view .interestPoiTourModalClose {
-  pointer-events: auto !important;
+.interestPoiTourModalShell--open .interestPoiTourModalClose {
+  pointer-events: auto;
 }
 
 .interestPoiTourModalClose {

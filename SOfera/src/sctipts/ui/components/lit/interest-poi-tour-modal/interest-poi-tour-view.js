@@ -27,25 +27,26 @@ class InterestPoiTourView extends BaseElement {
     }
 
     render() {
+        if (!this.open)
+            return nothing;
+
         return html`
             <div
-                class="interestPoiTourModalShell ${this.open ? 'interestPoiTourModalShell--open' : ''}"
+                class="interestPoiTourModalShell interestPoiTourModalShell--open"
                 role="dialog"
                 aria-modal="true"
                 aria-label="Прогулка по двору"
-                aria-hidden=${this.open ? 'false' : 'true'}
+                aria-hidden="false"
                 @pointerdown=${this._stop}
             >
-                ${this.open ? html`
-                    <iframe
-                        class="interestPoiTourModalIframe"
-                        src=${INTEREST_POI_TOUR_URL}
-                        title="Прогулка по двору"
-                        allowfullscreen
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allow="xr-spatial-tracking *; fullscreen *; accelerometer *; gyroscope *; magnetometer *"
-                    ></iframe>
-                ` : nothing}
+                <iframe
+                    class="interestPoiTourModalIframe"
+                    src=${INTEREST_POI_TOUR_URL}
+                    title="Прогулка по двору"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="xr-spatial-tracking *; fullscreen *; accelerometer *; gyroscope *; magnetometer *"
+                ></iframe>
 
                 <div class="interestPoiTourModalBar">
                     <button
