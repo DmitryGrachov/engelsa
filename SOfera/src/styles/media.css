@@ -178,6 +178,16 @@
         font-size: 13px;
     }
 
+    .interestPoiCardTourBtn {
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        height: 44px;
+        padding: 0 18px;
+        border-radius: 22px;
+        font-size: 13px;
+    }
+
     .interestPoiCardIcon {
         top: 14px;
         right: 14px;

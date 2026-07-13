@@ -11,7 +11,8 @@ class InterestPoiCard extends BaseElement {
         location: { type: String },
         bgSrc: { type: String, attribute: 'bg-src' },
         iconSrc: { type: String, attribute: 'icon-src' },
-        iconType: { type: String, attribute: 'icon-type' }
+        iconType: { type: String, attribute: 'icon-type' },
+        withTourBtn: { type: Boolean, attribute: 'with-tour-btn' }
     };
 
     constructor() {
@@ -21,6 +22,13 @@ class InterestPoiCard extends BaseElement {
         this.bgSrc = '';
         this.iconSrc = '';
         this.iconType = 'mask';
+        this.withTourBtn = false;
+    }
+
+    /** @param {Event} event */
+    _onTourClick(event) {
+        event.stopPropagation();
+        this.dispatchEvent(new CustomEvent('interest-poi-tour', { bubbles: true }));
     }
 
     _renderIcon() {
@@ -78,7 +86,18 @@ class InterestPoiCard extends BaseElement {
                 part="title"
             >${this.cardTitle}</h3>
 
-            <p class="interestPoiCardLocation" part="location">${this.location}</p>
+            ${this.withTourBtn
+                ? html`
+                    <button
+                        type="button"
+                        class="interestPoiCardTourBtn"
+                        part="tour-btn"
+                        @click=${this._onTourClick}
+                    >
+                        <span>Начать прогулку</span>
+                    </button>
+                `
+                : html`<p class="interestPoiCardLocation" part="location">${this.location}</p>`}
 
             ${hasIcon
                 ? html`

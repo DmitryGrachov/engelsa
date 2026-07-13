@@ -7,6 +7,7 @@
  * @property {string} bg
  * @property {string} [icon]
  * @property {InterestPoiCardIconType} [iconType]
+ * @property {boolean} [withTourBtn]
  */
 
 const INTERESTS_BG = './assets/interests/bg';
@@ -62,7 +63,8 @@ export const INTEREST_POI_WIDE_CARD_BY_TITLE = {
         location: 'Благоустройство',
         bg: `${INTERESTS_BG}/yard.svg`,
         icon: './assets/icons/pois/yard.svg',
-        iconType: 'raster'
+        iconType: 'raster',
+        withTourBtn: true
     }
 };
 
