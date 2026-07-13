@@ -296,9 +296,7 @@
 @media (max-width: 818px) {
     #floorPlansSearchDock.floorPlansSearchDock--expanded {
         top: auto;
-        bottom: calc(
-            20px + 55px + 16px + env(safe-area-inset-bottom, 0px)
-        );
+        bottom: calc(20px + 55px + 16px + env(safe-area-inset-bottom, 0px));
     }
 
     #floorPlansSearchBtn {
@@ -661,22 +659,21 @@
 
 .sidePanelFilterActive .sidePanelIcon {
     /* Tint <img> (svg) to #D7D7D7 */
-    filter: brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%)
-        hue-rotate(0deg) brightness(100%) contrast(100%);
+    filter: brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 .panelButton {
-  border: none;
-  cursor: pointer;
-  background-color: #1C1C1C;
-  transition: background-color 200ms ease, color 200ms ease;
-  position: relative;
+    border: none;
+    cursor: pointer;
+    background-color: #1C1C1C;
+    transition: background-color 200ms ease, color 200ms ease;
+    position: relative;
 }
 
 .panelButtonIcon {
-  width: 17px;
-  height: 17px;
-  transition: filter 0.2s ease;
+    width: 17px;
+    height: 17px;
+    transition: filter 0.2s ease;
 }
 
 .panelButtonBadge {
@@ -727,8 +724,7 @@
 }
 
 .panelButton.active .panelButtonIcon {
-    filter: brightness(0) saturate(100%) invert(87%) sepia(19%) saturate(1046%)
-        hue-rotate(121deg) brightness(95%) contrast(91%);
+    filter: brightness(0) saturate(100%) invert(87%) sepia(19%) saturate(1046%) hue-rotate(121deg) brightness(95%) contrast(91%);
 }
 
 #panel button[data-panel-mode="favorites"].active .panelButtonBadge {
@@ -848,8 +844,7 @@
     height: 24px;
     object-fit: contain;
     justify-self: start;
-    filter: brightness(0) saturate(100%) invert(96%) sepia(3%) saturate(4%)
-        hue-rotate(314deg) brightness(103%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(96%) sepia(3%) saturate(4%) hue-rotate(314deg) brightness(103%) contrast(92%);
 }
 
 .filterModalAdvancedTitle {
@@ -903,7 +898,7 @@
     gap: 0;
 }
 
-.filterModalAdvancedBody > *:not(.filterModalVGap):not(.filterModalVGapElastic) {
+.filterModalAdvancedBody>*:not(.filterModalVGap):not(.filterModalVGapElastic) {
     flex-shrink: 0;
 }
 
@@ -971,14 +966,12 @@
 
 .filterModalTypeBtn:not(.filterModalTypeBtnActive) .filterModalBtnIcon,
 .filterModalViewBtn:not(.filterModalViewBtnActive) .filterModalBtnIcon {
-    filter: brightness(0) saturate(100%) invert(96%) sepia(3%) saturate(4%)
-        hue-rotate(314deg) brightness(103%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(96%) sepia(3%) saturate(4%) hue-rotate(314deg) brightness(103%) contrast(92%);
 }
 
 .filterModalTypeBtnActive .filterModalBtnIcon,
 .filterModalViewBtnActive .filterModalBtnIcon {
-    filter: brightness(0) saturate(100%) invert(21%) sepia(0%) saturate(0%)
-        hue-rotate(0deg) brightness(93%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(21%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(93%) contrast(92%);
 }
 
 .filterModalBtnText {
@@ -1021,7 +1014,7 @@
     gap: 0;
 }
 
-.filterModalBody > *:not(.filterModalVGap):not(.filterModalVGapElastic) {
+.filterModalBody>*:not(.filterModalVGap):not(.filterModalVGapElastic) {
     flex-shrink: 0;
 }
 
@@ -1317,396 +1310,393 @@
 }
 
 .filterModalActionBtnGhost .filterModalBtnIcon {
-    filter: brightness(0) saturate(100%) invert(96%) sepia(3%) saturate(4%)
-        hue-rotate(314deg) brightness(103%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(96%) sepia(3%) saturate(4%) hue-rotate(314deg) brightness(103%) contrast(92%);
 }
 
 .filterModalActionBtn:not(.filterModalActionBtnGhost) .filterModalBtnIcon {
-    filter: brightness(0) saturate(100%) invert(21%) sepia(0%) saturate(0%)
-        hue-rotate(0deg) brightness(93%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(21%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(93%) contrast(92%);
 }
 
 .listFix span {
-  margin-left: -8px;
+    margin-left: -8px;
 }
 
 /* POI desktop/mobile — poi-modal-desktop.css, poi-modal-mobile.css */
 
 /* Полноэкранный iframe-виджет тура (см. tour-widget-frame.js) */
 .tourWidgetFrameShell {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  background: #0f0f0f;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.24s ease, visibility 0s linear 0.24s;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: #0f0f0f;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.24s ease, visibility 0s linear 0.24s;
 }
 
 .tourWidgetFrameShell.tourWidgetFrameShell--open {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-  transition-delay: 0s;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0s;
 }
 
 #ui .tourWidgetFrameShell .tourWidgetFrameClose {
-  pointer-events: auto !important;
+    pointer-events: auto !important;
 }
 
 .tourWidgetFrameBar {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: 48px;
-  padding: 0 10px 0 12px;
-  box-sizing: border-box;
-  background: rgba(22, 22, 22, 0.98);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 48px;
+    padding: 0 10px 0 12px;
+    box-sizing: border-box;
+    background: rgba(22, 22, 22, 0.98);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .tourWidgetFrameClose {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
 }
 
 .tourWidgetFrameClose:hover {
-  background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.18);
 }
 
 .tourWidgetFrameCloseIcon {
-  font-size: 28px;
-  line-height: 1;
-  font-weight: 300;
-  display: block;
-  margin-top: -2px;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 300;
+    display: block;
+    margin-top: -2px;
 }
 
 .tourWidgetFrameIframe {
-  flex: 1;
-  width: 100%;
-  min-height: 0;
-  border: 0;
-  display: block;
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    border: 0;
+    display: block;
 }
 
 /* Interest POI */
 
 .interestPoiMarker {
-  position: absolute;
-  transform: translate(-50%, -100%);
-  box-sizing: border-box;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  color: #333333;
-  background: transparent;
+    position: absolute;
+    transform: translate(-50%, -100%);
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    color: #333333;
+    background: transparent;
 }
 
 .interestPoiMarkerPill {
-  box-sizing: border-box;
-  min-height: 32px;
-  padding: 7px 11px;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border-radius: 15px;
-  background: #ffffff;
+    box-sizing: border-box;
+    min-height: 32px;
+    padding: 7px 11px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 15px;
+    background: #ffffff;
 }
 
 .interestPoiMarkerPin {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    pointer-events: none;
 }
 
 .interestPoiMarkerPinStem {
-  width: 2px;
-  height: 18px;
-  background: #ffffff;
+    width: 2px;
+    height: 18px;
+    background: #ffffff;
 }
 
 .interestPoiMarkerPinDot {
-  width: 6px;
-  height: 6px;
-  margin-top: -1px;
-  border-radius: 50%;
-  background: #ffffff;
+    width: 6px;
+    height: 6px;
+    margin-top: -1px;
+    border-radius: 50%;
+    background: #ffffff;
 }
 
 .interestPoiMarkerIconMask {
-  flex-shrink: 0;
-  width: 15px;
-  height: 15px;
-  background-color: #dddddd;
-  transition: background-color 0.15s ease;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    background-color: #dddddd;
+    transition: background-color 0.15s ease;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
 .interestPoiMarker--active .interestPoiMarkerIconMask {
-  background-color: #53ecc1;
+    background-color: #53ecc1;
 }
 
 .interestPoiMarkerIconRaster {
-  flex-shrink: 0;
-  width: 15px;
-  height: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .interestPoiMarkerIconRaster img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* Двор: растровая иконка — тонируем под #53ECC1 в активном состоянии */
 .interestPoiMarker--active .interestPoiMarkerIconRaster img {
-  filter: brightness(0) saturate(100%) invert(79%) sepia(24%) saturate(1056%) hue-rotate(118deg) brightness(98%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(79%) sepia(24%) saturate(1056%) hue-rotate(118deg) brightness(98%) contrast(92%);
 }
 
 .interestPoiMarkerLabel {
-  flex: 0 1 auto;
-  min-width: 0;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1;
-  text-align: center;
-  color: #333333;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    flex: 0 1 auto;
+    min-width: 0;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .interestPoiCard {
-  position: absolute;
-  z-index: 5;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background: #ffffff;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+    position: absolute;
+    z-index: 5;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #ffffff;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .interestPoiCard.open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .interestPoiCard--section {
-  width: calc(var(--interest-section-card-w, 200) * 1px);
-  height: calc(var(--interest-section-card-h, 186) * 1px);
-  border-radius: 15px;
+    width: calc(var(--interest-section-card-w, 200) * 1px);
+    height: calc(var(--interest-section-card-h, 186) * 1px);
+    border-radius: 15px;
 }
 
 .interestPoiCard--wide {
-  width: 210px;
-  height: 105px;
-  border-radius: 20px;
+    width: 210px;
+    height: 105px;
+    border-radius: 20px;
 }
 
 .interestPoiCard--wide.interestPoiCard {
-  display: block;
-  position: absolute;
+    display: block;
+    position: absolute;
 }
 
 .interestPoiCardBg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
 }
 
 .interestPoiCardBgImg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .interestPoiCardOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.45) 0%,
-    rgba(0, 0, 0, 0.12) 42%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
-  pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.45) 0%,
+            rgba(0, 0, 0, 0.12) 42%,
+            rgba(0, 0, 0, 0.55) 100%);
+    pointer-events: none;
 }
 
 .interestPoiCardTitle {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  right: 44px;
-  margin: 0;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.15;
-  color: #ffffff;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 44px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #ffffff;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
 
 .interestPoiCardTitle--full {
-  right: 10px;
+    right: 10px;
 }
 
 .interestPoiCardLocation {
-  position: absolute;
-  left: 14px;
-  bottom: 14px;
-  margin: 0;
-  font-size: 9px;
-  font-weight: 500;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.92);
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    margin: 0;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.92);
 }
 
 .interestPoiCardTourBtn {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 28px;
-  margin: 0;
-  padding: 0 12px;
-  border: none;
-  border-radius: 14px;
-  font-family: inherit;
-  font-size: 9px;
-  font-weight: 500;
-  line-height: 1;
-  color: #000000;
-  background: #53ecc1;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    width: 102px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0 12px;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1;
+    color: #FEFEFE;
+    background: #26BDA9;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transform: translateX(-50%);
+    transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .interestPoiCardTourBtn:hover {
-  background: #45d9b0;
+    background: #45d9b0;
 }
 
 .interestPoiCardTourBtn:active {
-  transform: scale(0.98);
+    transform: translateX(-50%) scale(0.98);
 }
 
 .interestPoiCardIcon {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .interestPoiCardIconMask {
-  width: 16px;
-  height: 16px;
-  background-color: #53ecc1;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+    width: 16px;
+    height: 16px;
+    background-color: #53ecc1;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
 .interestPoiCardIconRaster {
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .interestPoiCardIconRaster img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(79%) sepia(24%) saturate(1056%) hue-rotate(118deg) brightness(98%) contrast(92%);
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(79%) sepia(24%) saturate(1056%) hue-rotate(118deg) brightness(98%) contrast(92%);
 }
 
 .interestPoiCardMedia {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .interestPoiCardImg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #ffffff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #ffffff;
 }
 
 .interestPoiCardBtn {
-  position: absolute;
-  right: 0px;
-  left: 0;
-  bottom: 0px;
-  height: 30px;
-  margin: 0;
-  padding: 2px 8px;
-  border: none;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  color: #333333;
-  background: rgba(255, 255, 255, 0.92);
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  opacity: 0;
+    position: absolute;
+    right: 0px;
+    left: 0;
+    bottom: 0px;
+    height: 30px;
+    margin: 0;
+    padding: 2px 8px;
+    border: none;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #333333;
+    background: rgba(255, 255, 255, 0.92);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    opacity: 0;
 }
 
 /* Floor plan POI — см. floor-poi.css (<floor-poi-card>) */
