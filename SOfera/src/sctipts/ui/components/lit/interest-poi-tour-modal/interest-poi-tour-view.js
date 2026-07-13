@@ -4,6 +4,7 @@ import {
     nothing,
     registerComponent
 } from '../../../lit/index.js';
+import { assetUrl } from '../../../../utils/asset-url.js';
 import { INTEREST_POI_TOUR_URL } from './interest-poi-tour-data.js';
 
 class InterestPoiTourView extends BaseElement {
@@ -52,10 +53,18 @@ class InterestPoiTourView extends BaseElement {
                     <button
                         type="button"
                         class="interestPoiTourModalClose"
-                        aria-label="Закрыть"
+                        aria-label="Завершить тур"
                         @click=${this._onCloseClick}
                     >
-                        <span class="interestPoiTourModalCloseIcon" aria-hidden="true">×</span>
+                        <span class="interestPoiTourModalCloseLabel">Завершить тур</span>
+                        <img
+                            class="interestPoiTourModalCloseIcon"
+                            src=${assetUrl('./assets/icons/close.svg')}
+                            alt=""
+                            width="30"
+                            height="30"
+                            draggable="false"
+                        />
                     </button>
                 </div>
             </div>
