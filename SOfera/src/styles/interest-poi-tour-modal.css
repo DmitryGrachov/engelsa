@@ -35,11 +35,20 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 35px 32px 0 32px;
   box-sizing: border-box;
   background: transparent;
   border: none;
+  pointer-events: none;
+}
+
+.interestPoiTourModalLogo {
+  display: block;
+  flex-shrink: 0;
+  width: 101px;
+  height: 16px;
+  object-fit: contain;
   pointer-events: none;
 }
 

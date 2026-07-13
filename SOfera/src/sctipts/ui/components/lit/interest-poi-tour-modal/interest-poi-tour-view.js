@@ -50,6 +50,14 @@ class InterestPoiTourView extends BaseElement {
                 ></iframe>
 
                 <div class="interestPoiTourModalBar">
+                    <img
+                        class="interestPoiTourModalLogo"
+                        src=${assetUrl('./assets/icons/small_logo.svg')}
+                        alt="OCT"
+                        width="101"
+                        height="16"
+                        draggable="false"
+                    />
                     <button
                         type="button"
                         class="interestPoiTourModalClose"
