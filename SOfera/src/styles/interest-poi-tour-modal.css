@@ -9,10 +9,8 @@ interest-poi-tour-view {
 .interestPoiTourModalShell {
   position: fixed;
   inset: 0;
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
-  background: #0f0f0f;
+  background: transparent;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -26,20 +24,34 @@ interest-poi-tour-view {
   transition-delay: 0s;
 }
 
-#ui interest-poi-tour-view .interestPoiTourModalClose {
-  pointer-events: auto !important;
+.interestPoiTourModalIframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .interestPoiTourModalBar {
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   height: 48px;
   padding: 0 10px 0 12px;
   box-sizing: border-box;
-  background: rgba(22, 22, 22, 0.98);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+
+#ui interest-poi-tour-view .interestPoiTourModalClose {
+  pointer-events: auto !important;
 }
 
 .interestPoiTourModalClose {
@@ -54,12 +66,14 @@ interest-poi-tour-view {
   border-radius: 10px;
   cursor: pointer;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   transition: background-color 0.2s ease;
 }
 
 .interestPoiTourModalClose:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .interestPoiTourModalCloseIcon {
@@ -68,12 +82,4 @@ interest-poi-tour-view {
   font-weight: 300;
   display: block;
   margin-top: -2px;
-}
-
-.interestPoiTourModalIframe {
-  flex: 1;
-  width: 100%;
-  min-height: 0;
-  border: 0;
-  display: block;
 }

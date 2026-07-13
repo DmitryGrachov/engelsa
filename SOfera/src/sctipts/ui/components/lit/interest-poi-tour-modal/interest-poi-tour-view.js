@@ -36,17 +36,6 @@ class InterestPoiTourView extends BaseElement {
                 aria-hidden=${this.open ? 'false' : 'true'}
                 @pointerdown=${this._stop}
             >
-                <div class="interestPoiTourModalBar">
-                    <button
-                        type="button"
-                        class="interestPoiTourModalClose"
-                        aria-label="Закрыть"
-                        @click=${this._onCloseClick}
-                    >
-                        <span class="interestPoiTourModalCloseIcon" aria-hidden="true">×</span>
-                    </button>
-                </div>
-
                 ${this.open ? html`
                     <iframe
                         class="interestPoiTourModalIframe"
@@ -57,6 +46,17 @@ class InterestPoiTourView extends BaseElement {
                         allow="xr-spatial-tracking *; fullscreen *; accelerometer *; gyroscope *; magnetometer *"
                     ></iframe>
                 ` : nothing}
+
+                <div class="interestPoiTourModalBar">
+                    <button
+                        type="button"
+                        class="interestPoiTourModalClose"
+                        aria-label="Закрыть"
+                        @click=${this._onCloseClick}
+                    >
+                        <span class="interestPoiTourModalCloseIcon" aria-hidden="true">×</span>
+                    </button>
+                </div>
             </div>
         `;
     }
