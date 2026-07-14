@@ -1,4 +1,5 @@
 import './interest-poi-tour-view.js';
+import { pauseEngineRender, resumeEngineRender } from '../../../engine-render-pause.js';
 
 export const createInterestPoiTourModal = () => {
     const uiRoot = document.getElementById('ui');
@@ -10,11 +11,13 @@ export const createInterestPoiTourModal = () => {
     uiRoot.appendChild(view);
 
     const openModal = () => {
+        pauseEngineRender();
         view.open = true;
     };
 
     const closeModal = () => {
         view.open = false;
+        resumeEngineRender();
     };
 
     view.addEventListener('interest-poi-tour-close', closeModal);
