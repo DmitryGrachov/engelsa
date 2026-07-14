@@ -22,12 +22,14 @@ const MENU_ICON = html`
 
 class FavoritesApartmentsMobHeader extends BaseElement {
     static properties = {
-        compareCount: { type: Number, attribute: 'compare-count' }
+        compareCount: { type: Number, attribute: 'compare-count' },
+        totalCount: { type: Number, attribute: 'total-count' }
     };
 
     constructor() {
         super();
         this.compareCount = 0;
+        this.totalCount = 0;
     }
 
     _onCloseClick() {
@@ -92,19 +94,23 @@ class FavoritesApartmentsMobHeader extends BaseElement {
                 </div>
 
                 <div class="favoritesApartmentsMobHeaderActions">
-                    <button
-                        type="button"
-                        class="favoritesApartmentsMobClearBtn"
-                        @click=${this._onClearClick}
-                    >
-                        <span>Очистить избранное</span>
-                        <img
-                            class="favoritesApartmentsMobClearBtnIcon"
-                            src=${garbageIconSrc}
-                            alt=""
-                            aria-hidden="true"
-                        />
-                    </button>
+                    ${this.totalCount > 0
+                        ? html`
+                            <button
+                                type="button"
+                                class="favoritesApartmentsMobClearBtn"
+                                @click=${this._onClearClick}
+                            >
+                                <span>Очистить избранное</span>
+                                <img
+                                    class="favoritesApartmentsMobClearBtnIcon"
+                                    src=${garbageIconSrc}
+                                    alt=""
+                                    aria-hidden="true"
+                                />
+                            </button>
+                        `
+                        : null}
 
                     <button
                         type="button"

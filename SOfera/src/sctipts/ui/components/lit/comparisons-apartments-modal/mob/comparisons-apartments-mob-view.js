@@ -69,7 +69,9 @@ class ComparisonsApartmentsMobView extends BaseElement {
 
         return html`
             <div class="favoritesApartmentsMobView" part="root">
-                <comparisons-apartments-mob-header></comparisons-apartments-mob-header>
+                <comparisons-apartments-mob-header
+                    total-count=${this.totalCount}
+                ></comparisons-apartments-mob-header>
 
                 <filter-group-variants-mob-sort
                     .field=${this.sortField}

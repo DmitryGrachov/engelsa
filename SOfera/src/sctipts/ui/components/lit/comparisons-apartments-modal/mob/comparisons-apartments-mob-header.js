@@ -19,6 +19,15 @@ const MENU_ICON = html`
 `;
 
 class ComparisonsApartmentsMobHeader extends BaseElement {
+    static properties = {
+        totalCount: { type: Number, attribute: 'total-count' }
+    };
+
+    constructor() {
+        super();
+        this.totalCount = 0;
+    }
+
     _onCloseClick() {
         this.dispatchEvent(new CustomEvent('comparisons-apartments-close', {
             bubbles: true
@@ -74,19 +83,23 @@ class ComparisonsApartmentsMobHeader extends BaseElement {
                 </div>
 
                 <div class="favoritesApartmentsMobHeaderActions">
-                    <button
-                        type="button"
-                        class="favoritesApartmentsMobClearBtn"
-                        @click=${this._onClearClick}
-                    >
-                        <span>Очистить сравнение</span>
-                        <img
-                            class="favoritesApartmentsMobClearBtnIcon"
-                            src=${garbageIconSrc}
-                            alt=""
-                            aria-hidden="true"
-                        />
-                    </button>
+                    ${this.totalCount > 0
+                        ? html`
+                            <button
+                                type="button"
+                                class="favoritesApartmentsMobClearBtn"
+                                @click=${this._onClearClick}
+                            >
+                                <span>Очистить сравнение</span>
+                                <img
+                                    class="favoritesApartmentsMobClearBtnIcon"
+                                    src=${garbageIconSrc}
+                                    alt=""
+                                    aria-hidden="true"
+                                />
+                            </button>
+                        `
+                        : null}
                 </div>
             </header>
         `;

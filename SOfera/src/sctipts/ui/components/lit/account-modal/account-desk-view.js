@@ -309,19 +309,23 @@ class AccountDeskView extends BaseElement {
                                     />
                                 </button>
 
-                                <button
-                                    type="button"
-                                    class="accountDeskFavoritesClearBtn"
-                                    @click=${this._onClearClick}
-                                >
-                                    <span>Очистить избранное</span>
-                                    <img
-                                        class="accountDeskFavoritesClearBtnIcon"
-                                        src=${garbageIconSrc}
-                                        alt=""
-                                        aria-hidden="true"
-                                    />
-                                </button>
+                                ${this.apartmentsCount > 0
+                                    ? html`
+                                        <button
+                                            type="button"
+                                            class="accountDeskFavoritesClearBtn"
+                                            @click=${this._onClearClick}
+                                        >
+                                            <span>Очистить избранное</span>
+                                            <img
+                                                class="accountDeskFavoritesClearBtnIcon"
+                                                src=${garbageIconSrc}
+                                                alt=""
+                                                aria-hidden="true"
+                                            />
+                                        </button>
+                                    `
+                                    : null}
                             </div>
 
                             <div class="accountDeskFavoritesToolbarRight">
