@@ -17,6 +17,10 @@ import { downloadPoiOfferPdf } from '../../offers/index.js';
 import { createPoiRegOverlay } from './poi-reg-overlay.js';
 import { isFavorite, setFavorite } from '../../../../lib/favorites.js';
 import { bindTouchFriendlyButtons } from '../../utils/touch-friendly-buttons.js';
+import {
+    acquirePlanImageUrl,
+    releasePlanImagesAfterClose
+} from '../../utils/plan-image-memory.js';
 
 export const createPoiModalDesktop = () => {
     const uiRoot = document.getElementById('ui');
@@ -60,10 +64,20 @@ export const createPoiModalDesktop = () => {
     let currentInfo = null;
     /** @type {null | (() => void)} */
     let restoreOrbitAfterClose = null;
+    let applySeq = 0;
 
-    const applyDeskPanel = info => {
-        deskPanel.planSrc = resolvePoiModalPlanSrc(info);
-        deskPanel.floorPlanSrc = resolvePoiModalFloorPlanSrc(info);
+    const applyDeskPanel = async info => {
+        const seq = ++applySeq;
+        const [planSrc, floorPlanSrc] = await Promise.all([
+            acquirePlanImageUrl(resolvePoiModalPlanSrc(info)),
+            acquirePlanImageUrl(resolvePoiModalFloorPlanSrc(info))
+        ]);
+
+        if (seq !== applySeq || currentInfo !== info)
+            return;
+
+        deskPanel.planSrc = planSrc;
+        deskPanel.floorPlanSrc = floorPlanSrc;
         deskPanel.cardFallbackSrc = resolvePoiModalDeskCardFallbackSrc(info);
         deskPanel.favorite = isFavorite(info?.id);
         deskPanel.showSliceBtn = true;
@@ -72,9 +86,18 @@ export const createPoiModalDesktop = () => {
         deskPanel.info = info;
     };
 
-    const applyFsDetail = info => {
-        fsDetail.planSrc = resolvePoiModalPlanSrc(info);
-        fsDetail.floorPlanSrc = resolvePoiModalFloorPlanSrc(info);
+    const applyFsDetail = async info => {
+        const seq = ++applySeq;
+        const [planSrc, floorPlanSrc] = await Promise.all([
+            acquirePlanImageUrl(resolvePoiModalPlanSrc(info)),
+            acquirePlanImageUrl(resolvePoiModalFloorPlanSrc(info))
+        ]);
+
+        if (seq !== applySeq || currentInfo !== info)
+            return;
+
+        fsDetail.planSrc = planSrc;
+        fsDetail.floorPlanSrc = floorPlanSrc;
         fsDetail.cardFallbackSrc = resolvePoiModalDeskCardFallbackSrc(info);
         fsDetail.favorite = isFavorite(info?.id);
         fsDetail.viewMode = 'layout';
@@ -152,6 +175,7 @@ export const createPoiModalDesktop = () => {
         root.setAttribute('aria-hidden', 'true');
 
         currentInfo = null;
+        applySeq += 1;
         deskPanel.info = null;
         deskPanel.planSrc = '';
         deskPanel.floorPlanSrc = '';
@@ -160,6 +184,7 @@ export const createPoiModalDesktop = () => {
         deskPanel.showSliceBtn = false;
         deskPanel.tagsExpanded = false;
         deskPanel.viewMode = 'layout';
+        void releasePlanImagesAfterClose([deskPanel, fsDetail]);
 
         const doRestore = restoreOrbitAfterClose;
 

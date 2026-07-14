@@ -10,6 +10,10 @@ import '../ui/components/lit/poi-modal/poi-modal-sheet-detail.js';
 import { createPoiRegOverlay } from '../poi/modal/poi-reg-overlay.js';
 import { isFavorite, setFavorite } from '../../../lib/favorites.js';
 import { bindTouchFriendlyButtons } from '../utils/touch-friendly-buttons.js';
+import {
+    acquirePlanImageUrl,
+    releasePlanImagesAfterClose
+} from '../utils/plan-image-memory.js';
 
 export const createFloorPlanSliceModalMobile = (options = {}) => {
     const onClosed = options.onClosed;
@@ -60,17 +64,33 @@ export const createFloorPlanSliceModalMobile = (options = {}) => {
     let detailCollapseTimer = null;
     /** @type {null | (() => void)} */
     let restoreOrbitAfterClose = null;
+    let applySeq = 0;
 
-    const applySheetCard = info => {
-        sheetCard.planSrc = resolvePoiModalPlanSrc(info);
+    const applySheetCard = async info => {
+        const seq = ++applySeq;
+        const planSrc = await acquirePlanImageUrl(resolvePoiModalPlanSrc(info));
+
+        if (seq !== applySeq || currentInfo !== info)
+            return;
+
+        sheetCard.planSrc = planSrc;
         sheetCard.cardFallbackSrc = resolvePoiModalCardFallbackSrc(info);
         sheetCard.favorite = isFavorite(info?.id);
         sheetCard.info = info;
     };
 
-    const applySheetDetail = info => {
-        sheetDetail.planSrc = resolvePoiModalPlanSrc(info);
-        sheetDetail.floorPlanSrc = resolvePoiModalFloorPlanSrc(info);
+    const applySheetDetail = async info => {
+        const seq = ++applySeq;
+        const [planSrc, floorPlanSrc] = await Promise.all([
+            acquirePlanImageUrl(resolvePoiModalPlanSrc(info)),
+            acquirePlanImageUrl(resolvePoiModalFloorPlanSrc(info))
+        ]);
+
+        if (seq !== applySeq || currentInfo !== info)
+            return;
+
+        sheetDetail.planSrc = planSrc;
+        sheetDetail.floorPlanSrc = floorPlanSrc;
         sheetDetail.cardFallbackSrc = resolvePoiModalCardFallbackSrc(info);
         sheetDetail.favorite = sheetCard.favorite;
         sheetDetail.tagsExpanded = false;
@@ -153,6 +173,7 @@ export const createFloorPlanSliceModalMobile = (options = {}) => {
         modal.setAttribute('aria-hidden', 'true');
 
         currentInfo = null;
+        applySeq += 1;
         sheetCard.info = null;
         sheetCard.planSrc = '';
         sheetCard.cardFallbackSrc = '';
@@ -164,6 +185,7 @@ export const createFloorPlanSliceModalMobile = (options = {}) => {
         sheetDetail.favorite = false;
         sheetDetail.tagsExpanded = false;
         sheetDetail.viewMode = 'layout';
+        void releasePlanImagesAfterClose([sheetCard, sheetDetail]);
 
         const doRestore = restoreOrbitAfterClose;
 
