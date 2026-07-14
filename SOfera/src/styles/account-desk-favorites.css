@@ -18,10 +18,7 @@
     height: 100%;
     overflow: hidden;
     padding:
-        calc(27px + env(safe-area-inset-top, 0px))
-        max(58px, env(safe-area-inset-right, 0px))
-        calc(150px + env(safe-area-inset-bottom, 0px))
-        max(58px, env(safe-area-inset-left, 0px));
+        calc(27px + env(safe-area-inset-top, 0px)) max(58px, env(safe-area-inset-right, 0px)) calc(150px + env(safe-area-inset-bottom, 0px)) max(58px, env(safe-area-inset-left, 0px));
 }
 
 /* Top bar */
@@ -487,9 +484,47 @@ button.accountDeskFavoritesUser[aria-expanded="true"] {
     object-fit: contain;
 }
 
+.accountDeskFavoritesClearBtn {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: 40px;
+    margin: 0 0 0 auto;
+    padding: 0 22px;
+    border: none;
+    border-radius: 64px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    background: #FFFFFF;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.accountDeskFavoritesClearBtn:hover {
+    background: #fafafa;
+}
+
+.accountDeskFavoritesClearBtn:active {
+    transform: scale(0.98);
+}
+
+.accountDeskFavoritesClearBtnIcon {
+    display: block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
 /* Sort — как filterGroupVariantsMobSort, крупнее */
 
-.accountDeskFavoritesToolbarRight > account-desk-favorites-sort {
+.accountDeskFavoritesToolbarRight>account-desk-favorites-sort {
     display: block;
     min-width: 0;
 }
@@ -646,14 +681,14 @@ button.accountDeskFavoritesUser[aria-expanded="true"] {
     background: rgba(0, 0, 0, 0.18);
 }
 
-.accountDeskFavoritesGrid > account-desk-favorites-card {
+.accountDeskFavoritesGrid>account-desk-favorites-card {
     display: flex;
     flex-direction: column;
     min-width: 0;
     height: 100%;
 }
 
-.accountDeskFavoritesGrid > account-desk-favorites-card > .accountDeskFavoritesCard {
+.accountDeskFavoritesGrid>account-desk-favorites-card>.accountDeskFavoritesCard {
     flex: 1 1 auto;
     height: 100%;
 }

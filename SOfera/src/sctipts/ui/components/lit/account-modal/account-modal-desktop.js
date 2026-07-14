@@ -1,6 +1,6 @@
 import './account-desk-view.js';
 import { refreshAccountView } from './account-modal-refresh.js';
-import { FAVORITES_CHANGE_EVENT } from '../../../../../../lib/favorites.js';
+import { FAVORITES_CHANGE_EVENT, setFavorites } from '../../../../../../lib/favorites.js';
 import { COMPARISONS_CHANGE_EVENT } from '../../../../../../lib/comparisons.js';
 import { focusApartmentFromVariant } from '../../../../poi/poi-focus.js';
 import { getPoiModal } from '../../../../poi/modal/poi-modal.js';
@@ -108,6 +108,11 @@ export const createAccountModalDesktop = () => {
 
         if (itemId === 'gallery')
             getGalleryModal()?.open?.();
+    });
+
+    view.addEventListener('account-desk-favorites-clear', () => {
+        setFavorites([]);
+        refresh();
     });
 
     view.addEventListener('account-desk-favorites-offers', () => {

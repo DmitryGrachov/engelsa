@@ -1,6 +1,6 @@
 import './desk/comparisons-desk-view.js';
 import { refreshComparisonsView } from './comparisons-modal-refresh.js';
-import { COMPARISONS_CHANGE_EVENT } from '../../../../../../lib/comparisons.js';
+import { COMPARISONS_CHANGE_EVENT, setComparisons } from '../../../../../../lib/comparisons.js';
 import { focusApartmentFromVariant } from '../../../../poi/poi-focus.js';
 import { getPoiModal } from '../../../../poi/modal/poi-modal.js';
 import { resolvePoiInfoFromVariant } from '../filter-group-variants-modal/filter-group-variant-poi.js';
@@ -95,6 +95,11 @@ export const createComparisonsModalDesktop = () => {
 
         if (itemId === 'gallery')
             getGalleryModal()?.open?.();
+    });
+
+    view.addEventListener('comparisons-desk-clear', () => {
+        setComparisons([]);
+        refresh();
     });
 
     view.addEventListener('comparisons-desk-offers', () => {

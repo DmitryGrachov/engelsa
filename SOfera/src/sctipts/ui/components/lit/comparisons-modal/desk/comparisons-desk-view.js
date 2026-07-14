@@ -90,6 +90,10 @@ class ComparisonsDeskView extends BaseElement {
         this._emit('comparisons-desk-offers');
     }
 
+    _onClearClick() {
+        this._emit('comparisons-desk-clear');
+    }
+
     /** @param {ComparisonsDeskTab} tab */
     _onTabClick(tab) {
         this.activeTab = tab;
@@ -146,6 +150,7 @@ class ComparisonsDeskView extends BaseElement {
         const logoSrc = assetUrl('./assets/main_logo_black.svg');
         const avatarSrc = assetUrl('./assets/icons/avatar.svg');
         const shareIconSrc = assetUrl('./assets/icons/buttons/share.svg');
+        const garbageIconSrc = assetUrl('./assets/icons/buttons/garbage.svg');
         const showApartmentsSection =
             this.activeTab === 'all' || this.activeTab === 'apartments';
 
@@ -290,6 +295,20 @@ class ComparisonsDeskView extends BaseElement {
                                     <img
                                         class="accountDeskFavoritesOffersBtnIcon"
                                         src=${shareIconSrc}
+                                        alt=""
+                                        aria-hidden="true"
+                                    />
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="accountDeskFavoritesClearBtn"
+                                    @click=${this._onClearClick}
+                                >
+                                    <span>Очистить сравнение</span>
+                                    <img
+                                        class="accountDeskFavoritesClearBtnIcon"
+                                        src=${garbageIconSrc}
                                         alt=""
                                         aria-hidden="true"
                                     />

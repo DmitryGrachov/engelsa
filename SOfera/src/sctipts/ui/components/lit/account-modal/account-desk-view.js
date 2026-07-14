@@ -98,6 +98,10 @@ class AccountDeskView extends BaseElement {
         this._emit('account-desk-favorites-compare');
     }
 
+    _onClearClick() {
+        this._emit('account-desk-favorites-clear');
+    }
+
     /** @param {AccountDeskFavoritesTab} tab */
     _onTabClick(tab) {
         this.activeTab = tab;
@@ -154,6 +158,7 @@ class AccountDeskView extends BaseElement {
         const logoSrc = assetUrl('./assets/main_logo_black.svg');
         const avatarSrc = assetUrl('./assets/icons/avatar.svg');
         const shareIconSrc = assetUrl('./assets/icons/buttons/share.svg');
+        const garbageIconSrc = assetUrl('./assets/icons/buttons/garbage.svg');
         const compareCount = Math.max(0, Math.min(this.compareCount, COMPARE_SLOT_MAX));
         const showApartmentsSection =
             this.activeTab === 'all' || this.activeTab === 'apartments';
@@ -299,6 +304,20 @@ class AccountDeskView extends BaseElement {
                                     <img
                                         class="accountDeskFavoritesOffersBtnIcon"
                                         src=${shareIconSrc}
+                                        alt=""
+                                        aria-hidden="true"
+                                    />
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="accountDeskFavoritesClearBtn"
+                                    @click=${this._onClearClick}
+                                >
+                                    <span>Очистить избранное</span>
+                                    <img
+                                        class="accountDeskFavoritesClearBtnIcon"
+                                        src=${garbageIconSrc}
                                         alt=""
                                         aria-hidden="true"
                                     />
