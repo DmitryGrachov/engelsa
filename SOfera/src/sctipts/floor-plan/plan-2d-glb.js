@@ -4,7 +4,7 @@ import { buildFloorPlanSliceFloors } from './floor-plan-config.js';
 import { resolveFloorPlanMeshName, floorPlanMeshName, FLOOR_PLAN_MAX_SECTIONS } from './floor-plan-mesh.js';
 
 /** Лимит GPU-кэша текстур планов (мобила жёстче — иначе VRAM уходит в краш вкладки). */
-const PLAN_TEXTURE_CACHE_MAX_MOBILE = 3;
+const PLAN_TEXTURE_CACHE_MAX_MOBILE = 1;
 const PLAN_TEXTURE_CACHE_MAX_DESKTOP = 8;
 
 /**
@@ -109,7 +109,7 @@ function collectNamedNodes(root, match) {
         const n = node.name;
 
         if (typeof n === 'string' && match(n))
-            map.set(n, /** @type {import('playcanvas').Entity} */ (node));
+            map.set(n, /** @type {import('playcanvas').Entity} */(node));
 
         const ch = node.children;
 
@@ -526,7 +526,7 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
 
                 applyTextureToMesh(meshName, entry.texture, texturePath);
             })
-            .catch(() => {});
+            .catch(() => { });
     };
 
     const resetFloorPlanTextures = () => {
