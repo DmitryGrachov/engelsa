@@ -15,6 +15,7 @@ import { createInterestPois } from './poi/interest-pois.js';
 import { mountAppUi } from './ui/index.js';
 import { installUiWheelScrollFix } from './ui/ui-wheel-scroll-fix.js';
 import { installEngineTextInputKeyboardGuard } from './ui/engine-keyboard-guard.js';
+import { installEngineRenderPause } from './ui/engine-render-pause.js';
 import { syncBackbufferMsaaForPoiVisibility } from './poi/poi-msaa-sync.js';
 import { bindCanvasQuarterResButton } from './dev/canvas-quarter-res-button.js';
 import { bindFloorSliceUi } from './floor-plan/floor-slice-ui.js';
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const viewer = await main(canvas, settingsJson, config);
 
     installEngineTextInputKeyboardGuard(viewer);
+    installEngineRenderPause(viewer);
 
     const app = viewer.global.app;
     const floorPlanData = buildFloorPlanData();

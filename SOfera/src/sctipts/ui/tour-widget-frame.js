@@ -3,6 +3,8 @@
  * Стили: `.tourWidgetFrame*` в `ui.css`.
  */
 
+import { pauseEngineRender, resumeEngineRender } from './engine-render-pause.js';
+
 /** URL по умолчанию (Hart OST widget). */
 export const TOUR_WIDGET_DEFAULT_URL =
     'https://ost.widget.hart-estate.ru/beta/?crmPlanId=544026&miniplan=original';
@@ -52,13 +54,24 @@ export function createTourWidgetFrame(opts) {
     root.append(bar, iframe);
     parent.appendChild(root);
 
+    let open = false;
+
     const close = () => {
+        if (!open)
+            return;
+
+        open = false;
         root.classList.remove('tourWidgetFrameShell--open');
         root.setAttribute('aria-hidden', 'true');
         iframe.removeAttribute('src');
+        resumeEngineRender();
     };
 
-    const open = (url = TOUR_WIDGET_DEFAULT_URL) => {
+    const openFrame = (url = TOUR_WIDGET_DEFAULT_URL) => {
+        if (!open)
+            pauseEngineRender();
+
+        open = true;
         iframe.src = url;
         root.classList.add('tourWidgetFrameShell--open');
         root.setAttribute('aria-hidden', 'false');
@@ -75,5 +88,5 @@ export function createTourWidgetFrame(opts) {
         root.remove();
     };
 
-    return { root, open, close, destroy };
+    return { root, open: openFrame, close, destroy };
 }
