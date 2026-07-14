@@ -1,6 +1,11 @@
 import { assetUrl } from '../utils/asset-url.js';
+import { isPoiNarrowViewport } from '../poi/poi-viewport.js';
 import { buildFloorPlanSliceFloors } from './floor-plan-config.js';
 import { resolveFloorPlanMeshName, floorPlanMeshName, FLOOR_PLAN_MAX_SECTIONS } from './floor-plan-mesh.js';
+
+/** Лимит GPU-кэша текстур планов (мобила жёстче — иначе VRAM уходит в краш вкладки). */
+const PLAN_TEXTURE_CACHE_MAX_MOBILE = 3;
+const PLAN_TEXTURE_CACHE_MAX_DESKTOP = 8;
 
 /**
  * GLB плана 2D — `models/plan2d.glb`, в корень сцены PlayCanvas (как POI_BOX).
@@ -233,8 +238,13 @@ function layoutPositionInMeshAabb(meshInstance, index, total) {
 }
 
 /**
+ * @typedef {{ asset: import('playcanvas').Asset, texture: import('playcanvas').Texture }} PlanTextureEntry
+ */
+
+/**
  * @param {import('playcanvas').Application} app
  * @param {string} path
+ * @returns {Promise<PlanTextureEntry>}
  */
 function loadPlanTexturePath(app, path) {
     return new Promise((resolve, reject) => {
@@ -253,7 +263,7 @@ function loadPlanTexturePath(app, path) {
                     if (err || !asset?.resource)
                         rej(err ?? new Error(`texture load failed: ${url}`));
                     else
-                        res(asset.resource);
+                        res({ asset, texture: /** @type {import('playcanvas').Texture} */ (asset.resource) });
                 });
             });
 
@@ -281,6 +291,23 @@ function loadPlanTexturePath(app, path) {
 
 /**
  * @param {import('playcanvas').Application} app
+ * @param {PlanTextureEntry} entry
+ */
+function unloadPlanTextureEntry(app, entry) {
+    try {
+        entry.asset?.unload?.();
+
+        if (entry.asset && app.assets?.remove)
+            app.assets.remove(entry.asset);
+        else
+            entry.texture?.destroy?.();
+    } catch (err) {
+        console.warn('[PLAN_2D] texture unload failed', err);
+    }
+}
+
+/**
+ * @param {import('playcanvas').Application} app
  * @param {Map<string, import('playcanvas').Entity>} planeEntities
  * @param {Map<string, import('playcanvas').Entity>} fpoiByApartmentName
  * @param {number[]} sliceFloors
@@ -292,10 +319,13 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
 
     /** @type {Map<string, { material: import('playcanvas').StandardMaterial; defaultDiffuse: import('playcanvas').Texture | null }>} */
     const meshMaterials = new Map();
-    /** @type {Map<string, import('playcanvas').Texture>} */
+    /** LRU: insertion order, touch = delete+set. @type {Map<string, PlanTextureEntry>} */
     const textureCache = new Map();
-    /** @type {Map<string, Promise<import('playcanvas').Texture>>} */
+    /** @type {Map<string, Promise<PlanTextureEntry>>} */
     const textureLoads = new Map();
+    let textureCacheEpoch = 0;
+    /** Путь текстуры, сейчас на меше (не вытеснять). */
+    let activeTexturePath = null;
 
     for (const meshName of planeEntities.keys()) {
         const mesh = getPlaneMeshInstance(planeEntities, meshName);
@@ -324,8 +354,84 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
             ent.enabled = allow.has(name);
     };
 
+    const getTextureCacheMax = () =>
+        (isPoiNarrowViewport() ? PLAN_TEXTURE_CACHE_MAX_MOBILE : PLAN_TEXTURE_CACHE_MAX_DESKTOP);
+
+    const touchTextureCache = (/** @type {string} */ path) => {
+        const entry = textureCache.get(path);
+
+        if (!entry)
+            return null;
+
+        textureCache.delete(path);
+        textureCache.set(path, entry);
+
+        return entry;
+    };
+
+    const detachTextureFromMaterials = (/** @type {import('playcanvas').Texture} */ texture) => {
+        let changed = false;
+
+        for (const [, entry] of meshMaterials) {
+            if (entry.material.diffuseMap !== texture)
+                continue;
+
+            entry.material.diffuseMap = entry.defaultDiffuse;
+            entry.material.update();
+            changed = true;
+        }
+
+        if (changed)
+            app.renderNextFrame = true;
+    };
+
+    const unloadCachedPath = (/** @type {string} */ path) => {
+        const entry = textureCache.get(path);
+
+        if (!entry)
+            return;
+
+        textureCache.delete(path);
+        detachTextureFromMaterials(entry.texture);
+
+        if (activeTexturePath === path)
+            activeTexturePath = null;
+
+        unloadPlanTextureEntry(app, entry);
+    };
+
+    const evictTextureCacheIfNeeded = (/** @type {string | null} */ keepPath) => {
+        const max = getTextureCacheMax();
+
+        while (textureCache.size > max) {
+            let evicted = false;
+
+            for (const path of textureCache.keys()) {
+                if (path === keepPath || path === activeTexturePath)
+                    continue;
+
+                unloadCachedPath(path);
+                evicted = true;
+                break;
+            }
+
+            if (!evicted)
+                break;
+        }
+    };
+
+    const clearTextureCache = () => {
+        textureCacheEpoch += 1;
+        textureLoads.clear();
+
+        for (const path of [...textureCache.keys()])
+            unloadCachedPath(path);
+
+        activeTexturePath = null;
+    };
+
     const ensureTexture = (/** @type {string} */ path) => {
-        const cached = textureCache.get(path);
+        const cached = touchTextureCache(path);
 
         if (cached)
             return Promise.resolve(cached);
@@ -335,16 +441,37 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
         if (inflight)
             return inflight;
 
+        const epoch = textureCacheEpoch;
         const loadPromise = loadPlanTexturePath(app, path)
-            .then(texture => {
-                textureCache.set(path, texture);
+            .then(entry => {
                 textureLoads.delete(path);
 
-                return texture;
+                if (epoch !== textureCacheEpoch) {
+                    unloadPlanTextureEntry(app, entry);
+                    throw new Error('[PLAN_2D] stale texture load');
+                }
+
+                const existing = touchTextureCache(path);
+
+                if (existing) {
+                    // Параллельная загрузка того же URL — оставляем уже закэшированную.
+                    if (existing.asset !== entry.asset)
+                        unloadPlanTextureEntry(app, entry);
+
+                    return existing;
+                }
+
+                textureCache.set(path, entry);
+                evictTextureCacheIfNeeded(path);
+
+                return entry;
             })
             .catch(err => {
                 textureLoads.delete(path);
-                console.error(err);
+
+                if (!String(err?.message ?? err).includes('stale texture load'))
+                    console.error(err);
+
                 throw err;
             });
 
@@ -353,7 +480,7 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
         return loadPromise;
     };
 
-    const applyTextureToMesh = (/** @type {string} */ meshName, /** @type {import('playcanvas').Texture | null} */ texture) => {
+    const applyTextureToMesh = (/** @type {string} */ meshName, /** @type {import('playcanvas').Texture | null} */ texture, /** @type {string | null} */ texturePath = null) => {
         const entry = meshMaterials.get(meshName);
 
         if (!entry)
@@ -361,6 +488,7 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
 
         entry.material.diffuseMap = texture;
         entry.material.update();
+        activeTexturePath = texture ? texturePath : null;
         app.renderNextFrame = true;
     };
 
@@ -370,6 +498,7 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
             entry.material.update();
         }
 
+        activeTexturePath = null;
         app.renderNextFrame = true;
     };
 
@@ -391,11 +520,11 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
         const capturedName = selectedApartment.name;
 
         ensureTexture(texturePath)
-            .then(texture => {
+            .then(entry => {
                 if (selectedApartment?.name !== capturedName)
                     return;
 
-                applyTextureToMesh(meshName, texture);
+                applyTextureToMesh(meshName, entry.texture, texturePath);
             })
             .catch(() => {});
     };
@@ -403,6 +532,7 @@ function makePlanesCtl(app, planeEntities, fpoiByApartmentName, sliceFloors, ste
     const resetFloorPlanTextures = () => {
         selectedApartment = null;
         resetAllMeshTextures();
+        clearTextureCache();
     };
 
     const setApartmentFloorPlan = (/** @type {PoiInfo | null | undefined} */ info) => {
