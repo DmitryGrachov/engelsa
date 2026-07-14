@@ -56,6 +56,16 @@ export function createTourWidgetFrame(opts) {
 
     let open = false;
 
+    const unloadIframe = () => {
+        try {
+            iframe.src = 'about:blank';
+        } catch {
+            /* ignore */
+        }
+
+        iframe.removeAttribute('src');
+    };
+
     const close = () => {
         if (!open)
             return;
@@ -63,7 +73,7 @@ export function createTourWidgetFrame(opts) {
         open = false;
         root.classList.remove('tourWidgetFrameShell--open');
         root.setAttribute('aria-hidden', 'true');
-        iframe.removeAttribute('src');
+        unloadIframe();
         resumeEngineRender();
     };
 
