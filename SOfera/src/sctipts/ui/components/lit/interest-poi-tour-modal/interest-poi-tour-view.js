@@ -1,7 +1,6 @@
 import {
     BaseElement,
     html,
-    nothing,
     registerComponent
 } from '../../../lit/index.js';
 import { assetUrl } from '../../../../utils/asset-url.js';
@@ -22,27 +21,73 @@ class InterestPoiTourView extends BaseElement {
         event.stopPropagation();
     }
 
+    /** @returns {HTMLIFrameElement | null} */
+    _getIframe() {
+        const iframe = this.renderRoot?.querySelector('iframe.interestPoiTourModalIframe');
+
+        return iframe instanceof HTMLIFrameElement ? iframe : null;
+    }
+
+    /** Выгрузка документа iframe (WebGL сфера) — до скрытия/remove. */
+    unloadTourIframe() {
+        const iframe = this._getIframe();
+
+        if (!iframe)
+            return;
+
+        try {
+            iframe.src = 'about:blank';
+        } catch {
+            /* ignore */
+        }
+
+        iframe.removeAttribute('src');
+    }
+
+    /** @param {Map<string, unknown>} changed */
+    willUpdate(changed) {
+        if (changed.has('open') && changed.get('open') === true && !this.open)
+            this.unloadTourIframe();
+    }
+
+    /** @param {Map<string, unknown>} changed */
+    updated(changed) {
+        if (!changed.has('open'))
+            return;
+
+        const iframe = this._getIframe();
+
+        if (!iframe)
+            return;
+
+        if (this.open) {
+            if (iframe.getAttribute('src') !== INTEREST_POI_TOUR_URL)
+                iframe.src = INTEREST_POI_TOUR_URL;
+
+            return;
+        }
+
+        this.unloadTourIframe();
+    }
+
     _onCloseClick() {
+        this.unloadTourIframe();
         this.open = false;
         this.dispatchEvent(new CustomEvent('interest-poi-tour-close', { bubbles: true }));
     }
 
     render() {
-        if (!this.open)
-            return nothing;
-
         return html`
             <div
-                class="interestPoiTourModalShell interestPoiTourModalShell--open"
+                class="interestPoiTourModalShell${this.open ? ' interestPoiTourModalShell--open' : ''}"
                 role="dialog"
                 aria-modal="true"
                 aria-label="Прогулка по двору"
-                aria-hidden="false"
+                aria-hidden=${this.open ? 'false' : 'true'}
                 @pointerdown=${this._stop}
             >
                 <iframe
                     class="interestPoiTourModalIframe"
-                    src=${INTEREST_POI_TOUR_URL}
                     title="Прогулка по двору"
                     allowfullscreen
                     referrerpolicy="strict-origin-when-cross-origin"

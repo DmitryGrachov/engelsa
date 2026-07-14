@@ -16,6 +16,9 @@ export const createInterestPoiTourModal = () => {
     };
 
     const closeModal = () => {
+        if (typeof view.unloadTourIframe === 'function')
+            view.unloadTourIframe();
+
         view.open = false;
         resumeEngineRender();
     };
@@ -36,6 +39,7 @@ export const createInterestPoiTourModal = () => {
         isOpen: () => view.open,
         destroy() {
             window.removeEventListener('keydown', onKeyDown);
+            closeModal();
             view.remove();
         }
     };
