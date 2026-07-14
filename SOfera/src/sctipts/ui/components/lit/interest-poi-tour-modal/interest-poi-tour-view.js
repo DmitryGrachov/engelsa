@@ -1,19 +1,28 @@
 import {
     BaseElement,
     html,
+    nothing,
     registerComponent
 } from '../../../lit/index.js';
 import { assetUrl } from '../../../../utils/asset-url.js';
 import { INTEREST_POI_TOUR_URL } from './interest-poi-tour-data.js';
+import { destroyHeavyIframe } from '../../../../utils/embed-iframe-dispose.js';
 
 class InterestPoiTourView extends BaseElement {
     static properties = {
-        open: { type: Boolean, reflect: true }
+        open: { type: Boolean, reflect: true },
+        /** Пересоздание iframe после destroy (сброс browsing context). */
+        _iframeEpoch: { state: true },
+        _iframeMounted: { state: true }
     };
 
     constructor() {
         super();
         this.open = false;
+        this._iframeEpoch = 0;
+        this._iframeMounted = false;
+        /** @type {Promise<void> | null} */
+        this._disposePromise = null;
     }
 
     /** @param {Event} event */
@@ -28,31 +37,45 @@ class InterestPoiTourView extends BaseElement {
         return iframe instanceof HTMLIFrameElement ? iframe : null;
     }
 
-    /** Выгрузка документа iframe (WebGL сфера) — до скрытия/remove. */
-    unloadTourIframe() {
+    /**
+     * Жёсткая выгрузка WebGL-документа iframe.
+     * @returns {Promise<void>}
+     */
+    disposeTourIframe() {
+        if (this._disposePromise)
+            return this._disposePromise;
+
         const iframe = this._getIframe();
 
-        if (!iframe)
-            return;
+        this._disposePromise = destroyHeavyIframe(iframe)
+            .then(() => {
+                this._iframeMounted = false;
+                this._iframeEpoch += 1;
+            })
+            .finally(() => {
+                this._disposePromise = null;
+            });
 
-        try {
-            iframe.src = 'about:blank';
-        } catch {
-            /* ignore */
-        }
+        return this._disposePromise;
+    }
 
-        iframe.removeAttribute('src');
+    /** @deprecated используйте disposeTourIframe */
+    unloadTourIframe() {
+        void this.disposeTourIframe();
     }
 
     /** @param {Map<string, unknown>} changed */
     willUpdate(changed) {
-        if (changed.has('open') && changed.get('open') === true && !this.open)
-            this.unloadTourIframe();
+        if (changed.has('open') && this.open && !this._iframeMounted)
+            this._iframeMounted = true;
     }
 
     /** @param {Map<string, unknown>} changed */
     updated(changed) {
-        if (!changed.has('open'))
+        if (!changed.has('open') && !changed.has('_iframeMounted') && !changed.has('_iframeEpoch'))
+            return;
+
+        if (!this.open || !this._iframeMounted)
             return;
 
         const iframe = this._getIframe();
@@ -60,19 +83,11 @@ class InterestPoiTourView extends BaseElement {
         if (!iframe)
             return;
 
-        if (this.open) {
-            if (iframe.getAttribute('src') !== INTEREST_POI_TOUR_URL)
-                iframe.src = INTEREST_POI_TOUR_URL;
-
-            return;
-        }
-
-        this.unloadTourIframe();
+        if (iframe.getAttribute('src') !== INTEREST_POI_TOUR_URL)
+            iframe.src = INTEREST_POI_TOUR_URL;
     }
 
     _onCloseClick() {
-        this.unloadTourIframe();
-        this.open = false;
         this.dispatchEvent(new CustomEvent('interest-poi-tour-close', { bubbles: true }));
     }
 
@@ -86,13 +101,16 @@ class InterestPoiTourView extends BaseElement {
                 aria-hidden=${this.open ? 'false' : 'true'}
                 @pointerdown=${this._stop}
             >
-                <iframe
-                    class="interestPoiTourModalIframe"
-                    title="Прогулка по двору"
-                    allowfullscreen
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allow="xr-spatial-tracking *; fullscreen *; accelerometer *; gyroscope *; magnetometer *"
-                ></iframe>
+                ${this._iframeMounted ? html`
+                    <iframe
+                        class="interestPoiTourModalIframe"
+                        data-epoch=${String(this._iframeEpoch)}
+                        title="Прогулка по двору"
+                        allowfullscreen
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allow="xr-spatial-tracking *; fullscreen *; accelerometer *; gyroscope *; magnetometer *"
+                    ></iframe>
+                ` : nothing}
 
                 <div class="interestPoiTourModalBar">
                     <img

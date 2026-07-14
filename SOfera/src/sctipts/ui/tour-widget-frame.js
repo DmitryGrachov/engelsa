@@ -3,11 +3,31 @@
  * Стили: `.tourWidgetFrame*` в `ui.css`.
  */
 
-import { pauseEngineRender, resumeEngineRender } from './engine-render-pause.js';
+import { pauseEngineRender } from './engine-render-pause.js';
+import {
+    destroyHeavyIframe,
+    resumeEngineRenderAfterIframe
+} from '../utils/embed-iframe-dispose.js';
 
 /** URL по умолчанию (Hart OST widget). */
 export const TOUR_WIDGET_DEFAULT_URL =
     'https://ost.widget.hart-estate.ru/beta/?crmPlanId=544026&miniplan=original';
+
+const createTourIframe = () => {
+    const iframe = document.createElement('iframe');
+
+    iframe.className = 'tourWidgetFrameIframe';
+    iframe.title = 'Тур по планировке';
+    iframe.setAttribute('allowfullscreen', 'true');
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    /* Виджет может дергать WebXR / сенсоры — без allow Chrome даёт Violation: xr-spatial-tracking is not allowed */
+    iframe.setAttribute(
+        'allow',
+        'xr-spatial-tracking *; fullscreen *; accelerometer *; gyroscope *; magnetometer *'
+    );
+
+    return iframe;
+};
 
 /**
  * @param {{ parent: HTMLElement; shellId?: string; closeAriaLabel?: string }} opts
@@ -39,49 +59,81 @@ export function createTourWidgetFrame(opts) {
     btnClose.setAttribute('aria-label', closeAriaLabel);
     btnClose.innerHTML = '<span class="tourWidgetFrameCloseIcon" aria-hidden="true">×</span>';
 
-    const iframe = document.createElement('iframe');
-    iframe.className = 'tourWidgetFrameIframe';
-    iframe.title = 'Тур по планировке';
-    iframe.setAttribute('allowfullscreen', 'true');
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    /* Виджет может дергать WebXR / сенсоры — без allow Chrome даёт Violation: xr-spatial-tracking is not allowed */
-    iframe.setAttribute(
-        'allow',
-        'xr-spatial-tracking *; fullscreen *; accelerometer *; gyroscope *; magnetometer *'
-    );
+    /** @type {HTMLIFrameElement} */
+    let iframe = createTourIframe();
+    let open = false;
+    let disposing = false;
+    /** @type {string | null} */
+    let pendingOpenUrl = null;
 
     bar.appendChild(btnClose);
     root.append(bar, iframe);
     parent.appendChild(root);
 
-    let open = false;
+    const ensureIframeMounted = () => {
+        if (iframe.isConnected)
+            return;
 
-    const unloadIframe = () => {
-        try {
-            iframe.src = 'about:blank';
-        } catch {
-            /* ignore */
-        }
-
-        iframe.removeAttribute('src');
+        root.appendChild(iframe);
     };
 
     const close = () => {
-        if (!open)
+        if (!open && !disposing)
             return;
 
         open = false;
         root.classList.remove('tourWidgetFrameShell--open');
         root.setAttribute('aria-hidden', 'true');
-        unloadIframe();
-        resumeEngineRender();
+
+        if (disposing)
+            return;
+
+        disposing = true;
+        const doomed = iframe;
+
+        // Новый пустой iframe (ещё не в DOM), чтобы open во время dispose не писал в doomed.
+        iframe = createTourIframe();
+
+        void destroyHeavyIframe(doomed)
+            .then(() => {
+                disposing = false;
+                ensureIframeMounted();
+
+                if (open && pendingOpenUrl) {
+                    const url = pendingOpenUrl;
+
+                    pendingOpenUrl = null;
+                    iframe.src = url;
+                    root.classList.add('tourWidgetFrameShell--open');
+                    root.setAttribute('aria-hidden', 'false');
+
+                    return;
+                }
+
+                pendingOpenUrl = null;
+
+                return resumeEngineRenderAfterIframe();
+            })
+            .catch(() => {
+                disposing = false;
+                ensureIframeMounted();
+                resumeEngineRenderAfterIframe();
+            });
     };
 
     const openFrame = (url = TOUR_WIDGET_DEFAULT_URL) => {
+        if (disposing) {
+            pendingOpenUrl = url;
+            open = true;
+
+            return;
+        }
+
         if (!open)
             pauseEngineRender();
 
         open = true;
+        ensureIframeMounted();
         iframe.src = url;
         root.classList.add('tourWidgetFrameShell--open');
         root.setAttribute('aria-hidden', 'false');
