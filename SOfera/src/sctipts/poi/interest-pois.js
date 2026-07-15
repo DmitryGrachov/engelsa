@@ -348,7 +348,7 @@ export const createInterestPois = (app, pois, { poiBoxController } = {}) => {
 
         card.addEventListener('interest-poi-tour', event => {
             event.stopPropagation();
-            window.open(INTEREST_POI_TOUR_URL, '_blank', 'noopener,noreferrer');
+            window.location.assign(INTEREST_POI_TOUR_URL);
             poiView.setClosed();
         });
 
