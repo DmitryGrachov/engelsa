@@ -585,9 +585,10 @@ const setupPoiBoxClick = (app, poiEntity, poiInfoByName, poiModal, viewer) => {
     };
 
     /**
-     * Capture: на десктопе глушим pointerdown на POI-меше.
-     * На мобиле pick на pointerup; dblclick движка глушим флагом на canvas (см. lib/index.js),
-     * без stopImmediatePropagation — иначе ломается pinch/zoom.
+     * Capture: на мыши глушим pointerdown на POI-меше.
+     * На любом touch (в т.ч. iPad landscape >900px) pick только на pointerup —
+     * без stopImmediatePropagation, иначе ломаются pinch/two-finger pan.
+     * ≤900px: double-tap; шире + touch: single tap.
      */
     canvas.addEventListener('pointerdown', (event) => {
         if (event.pointerType === 'touch') {
@@ -630,8 +631,7 @@ const setupPoiBoxClick = (app, poiEntity, poiInfoByName, poiModal, viewer) => {
                 }
             }
 
-            if (isPoiBoxDoubleTapViewport())
-                return;
+            return;
         }
 
         if (!poiEntity.enabled)
@@ -642,7 +642,7 @@ const setupPoiBoxClick = (app, poiEntity, poiInfoByName, poiModal, viewer) => {
         if (!cameraEntity)
             return;
 
-        if (event.pointerType === 'mouse' && event.button !== 0)
+        if (event.button !== 0)
             return;
 
         const { x, y } = getCanvasPointerCoords(event);
@@ -683,7 +683,7 @@ const setupPoiBoxClick = (app, poiEntity, poiInfoByName, poiModal, viewer) => {
 
         touchTapTracking.delete(event.pointerId);
 
-        if (!poiEntity.enabled || !isPoiBoxDoubleTapViewport())
+        if (!poiEntity.enabled)
             return;
 
         if (activeTouchPointerIds.size > 0) {
@@ -715,17 +715,27 @@ const setupPoiBoxClick = (app, poiEntity, poiInfoByName, poiModal, viewer) => {
         const cx = typeof event.clientX === 'number' ? event.clientX : event.x;
         const cy = typeof event.clientY === 'number' ? event.clientY : event.y;
         const now = performance.now();
-        const p = mobilePoiDoubleTapPending;
 
-        if (matchesMobilePoiDoubleTap(p, hitMeshInstance, cx, cy, now)) {
-            mobilePoiDoubleTapPending = null;
-            executePoiPickFromHit(hitMeshInstance);
+        // Phone / узкий viewport: открытие по double-tap.
+        if (isPoiBoxDoubleTapViewport()) {
+            const p = mobilePoiDoubleTapPending;
+
+            if (matchesMobilePoiDoubleTap(p, hitMeshInstance, cx, cy, now)) {
+                mobilePoiDoubleTapPending = null;
+                executePoiPickFromHit(hitMeshInstance);
+
+                return;
+            }
+
+            mobilePoiDoubleTapPending = { t: now, x: cx, y: cy, mesh: hitMeshInstance };
+            canvas.__poiSuppressEngineDblclickUntil = performance.now() + MOBILE_POI_DOUBLE_MS;
 
             return;
         }
 
-        mobilePoiDoubleTapPending = { t: now, x: cx, y: cy, mesh: hitMeshInstance };
-        canvas.__poiSuppressEngineDblclickUntil = performance.now() + MOBILE_POI_DOUBLE_MS;
+        // iPad / широкий touch: single tap (без SIP на down — жесты доходят до камеры).
+        mobilePoiDoubleTapPending = null;
+        executePoiPickFromHit(hitMeshInstance);
     };
 
     canvas.addEventListener('pointerup', finalizeTouchPointer, { capture: true });

@@ -41,7 +41,10 @@ export const isPoiDesktopCompactHeight = () =>
     typeof window !== 'undefined' &&
     window.matchMedia(getPoiDesktopCompactHeightMediaQuery()).matches;
 
-/** POI_BOX: двойной tap/клик при ширине ≤900px, одиночный — при ≥901px. */
+/**
+ * POI_BOX touch: двойной tap при ширине ≤900px, одиночный — при ≥901px (iPad landscape и т.п.).
+ * На любом touch pick без stopImmediatePropagation — см. poi-box.js.
+ */
 export const POI_BOX_DOUBLE_TAP_MAX_WIDTH_PX = 900;
 
 export const isPoiBoxDoubleTapViewport = () =>
