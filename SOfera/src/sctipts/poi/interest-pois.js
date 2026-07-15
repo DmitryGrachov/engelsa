@@ -4,7 +4,7 @@ import { getFilterModal, setFilterSection } from '../ui/components/filter/index.
 import { activateSearchPanelMode } from '../ui/panel-mode.js';
 import { isPoiNarrowViewport } from './poi-viewport.js';
 import { getInterestPoiWideCardSpec } from '../ui/components/lit/interest-poi-card/index.js';
-import { getInterestPoiTourModal } from '../ui/components/lit/interest-poi-tour-modal/index.js';
+import { INTEREST_POI_TOUR_URL } from '../ui/components/lit/interest-poi-tour-modal/index.js';
 import '../ui/components/lit/interest-poi-card/interest-poi-card.js';
 
 const INTERESTS_ICON = './assets/interests/icons';
@@ -348,7 +348,7 @@ export const createInterestPois = (app, pois, { poiBoxController } = {}) => {
 
         card.addEventListener('interest-poi-tour', event => {
             event.stopPropagation();
-            getInterestPoiTourModal()?.open?.();
+            window.open(INTEREST_POI_TOUR_URL, '_blank', 'noopener,noreferrer');
             poiView.setClosed();
         });
 
