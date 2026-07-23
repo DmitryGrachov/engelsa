@@ -72724,23 +72724,6 @@ const initUI = (global) => {
     tooltip.register(dom.vrMode, 'Enter VR', 'top');
     tooltip.register(dom.enterFullscreen, 'Fullscreen', 'top');
     tooltip.register(dom.exitFullscreen, 'Fullscreen', 'top');
-    const isThirdPartyEmbedded = () => {
-        try {
-            return window.location.hostname !== window.parent.location.hostname;
-        }
-        catch (e) {
-            // cross-origin iframe — parent location is inaccessible
-            return true;
-        }
-    };
-    if (window.parent !== window && isThirdPartyEmbedded()) {
-        const viewUrl = new URL(window.location.href);
-        if (viewUrl.pathname === '/s') {
-            viewUrl.pathname = '/view';
-        }
-        dom.supersplatBranding.href = viewUrl.toString();
-        dom.supersplatBranding.classList.remove('hidden');
-    }
 };
 
 // clamp the vertices of the hotspot so it is never clipped by the near or far plane
