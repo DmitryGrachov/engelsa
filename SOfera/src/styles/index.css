@@ -298,7 +298,7 @@ button {
   z-index: 999;
 }
 
-/* loadingWrap — белый полноэкранный слой; процент + полоса внизу как раньше */
+/* loadingWrap — чёрный полноэкранный слой; процент + полоса внизу как раньше */
 #loadingWrap {
   position: fixed;
   inset: 0;
@@ -310,7 +310,7 @@ button {
   justify-content: flex-end;
   padding: 16px;
   padding-bottom: max(120px, calc(16px + env(safe-area-inset-bottom, 0px)));
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 #loadingWrap > .loadingLogo {
@@ -320,7 +320,11 @@ button {
   transform: translate(-50%, -50%);
   display: block;
   width: min(220px, 56vw);
-  height: auto;
+  text-align: center;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   pointer-events: none;
   user-select: none;
 }
@@ -328,7 +332,7 @@ button {
 #loadingWrap > #loadingText {
   width: min(380px, calc(100vw - 32px));
   font-size: 18px;
-  color: #333333;
+  color: #ffffff;
   text-align: center;
 }
 #loadingWrap > #loadingBar {
@@ -337,7 +341,7 @@ button {
   margin-top: 8px;
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid #e5e5e5;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   box-sizing: border-box;
 }
 

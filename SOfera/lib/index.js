@@ -72375,10 +72375,10 @@ const initUI = (global) => {
     events.on('progress:changed', (progress) => {
         dom.loadingText.textContent = `${progress}%`;
         if (progress < 100) {
-            dom.loadingBar.style.backgroundImage = `linear-gradient(90deg, #000 0%, #000 ${progress}%, white ${progress}%, white 100%)`;
+            dom.loadingBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff ${progress}%, #333 ${progress}%, #333 100%)`;
         }
         else {
-            dom.loadingBar.style.backgroundImage = 'linear-gradient(90deg, #000 0%, #000 100%)';
+            dom.loadingBar.style.backgroundImage = 'linear-gradient(90deg, #fff 0%, #fff 100%)';
         }
     });
     // Hide loading bar once loaded
